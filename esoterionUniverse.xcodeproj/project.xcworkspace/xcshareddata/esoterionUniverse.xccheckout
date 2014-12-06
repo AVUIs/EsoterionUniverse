@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>D2F7AB8C-955C-4A3F-9C35-115B2E6BFDF5</string>
+	<key>IDESourceControlProjectName</key>
+	<string>esoterionUniverse</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>DED177243938DAD81E8DB2A407E55B7CB47EF408</key>
+		<string>https://github.com/AVUIs/EsoterionUniverse.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>esoterionUniverse.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>DED177243938DAD81E8DB2A407E55B7CB47EF408</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/AVUIs/EsoterionUniverse.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>DED177243938DAD81E8DB2A407E55B7CB47EF408</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>DED177243938DAD81E8DB2A407E55B7CB47EF408</string>
+			<key>IDESourceControlWCCName</key>
+			<string>EsoterionUniverse</string>
+		</dict>
+	</array>
+</dict>
+</plist>
