@@ -22,12 +22,9 @@ void ofApp::setup(){
     pointLight2.setSpecularColor(ofFloatColor(10, 10, 10));
     pointLight2.setPosition(120, 80, 500);
 
-<<<<<<< HEAD
-=======
 
     currentEditingObj = NULL;
     
->>>>>>> b2dd5efc5cac1a8e1fe86c0dd15be4646f103e27
 //    ofAddListener(ofEvent::mousePressed, &control, control::mousePressed)
 //    ofAddListener(ofEvents().mouseDragged , &control, &ctrls::mouseDragged);
 //    ofAddListener(ofEvents().mousePressed, &control, &ctrls::mousePressed);
