@@ -18,7 +18,10 @@ public:
     
     virtual ~ECUBaseObject() {}
     
+    virtual void update() {}
+
     virtual void draw() {}
     
     ofVec3f pos;
+    int id;
 };

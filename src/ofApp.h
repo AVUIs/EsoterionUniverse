@@ -26,4 +26,5 @@ class ofApp : public ofBaseApp{
     
     ofMesh mesh;
 //    ofEasyCam cam;
+    int curObj;
 };
