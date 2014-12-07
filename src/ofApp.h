@@ -3,6 +3,8 @@
 #include "ofMain.h"
 
 #include "ECUUniverse.h"
+#include "ctrls.h"
+
 
 class ofApp : public ofBaseApp{
 	public:
@@ -26,6 +28,8 @@ class ofApp : public ofBaseApp{
     
     
     ECUUniverse *universe;
+    ctrls control;
+    bool creatingObject;
     
     ofMesh mesh;
 //    ofEasyCam cam;

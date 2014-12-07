@@ -24,6 +24,14 @@ void ofApp::setup(){
     pointLight2.setPosition(120, 80, 500);
 
 
+//    ofAddListener(ofEvent::mousePressed, &control, control::mousePressed)
+//    ofAddListener(ofEvents().mouseDragged , &control, &ctrls::mouseDragged);
+//    ofAddListener(ofEvents().mousePressed, &control, &ctrls::mousePressed);
+//    ofAddListener(ofEvents().mouseReleased, &control, &ctrls::mouseReleased);
+//    ofAddListener(ofEvents().mouseScrolled, &control, &ctrls::mouseScrolled);
+
+//    ofRegisterMouseEvents(control);
+    
 
 }
 
@@ -34,6 +42,7 @@ void ofApp::exit() {
 //--------------------------------------------------------------
 void ofApp::update(){
     universe->update();
+    control.update();
 }
 
 //--------------------------------------------------------------
@@ -55,6 +64,8 @@ void ofApp::draw(){
     
     ofDisableLighting();
     ofDisableDepthTest();
+    
+    control.draw();
     
 //    ofVec3f t = ofVec3f(universe->pos.x, universe->pos.y, universe->pos.z-mouseY*10);
 //    ofDrawCircle(t.x, t.y, t.z);
@@ -130,7 +141,7 @@ void ofApp::keyReleased(int key){
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y){
-    
+    control.mouseMoved(x, y);
 }
 
 ofVec3f downPosition;
@@ -144,21 +155,20 @@ void ofApp::mouseDragged(int x, int y, int button) {
 //    universe->cam.rotateAround(mouseX-mouseRange, ofVec3f(0, 1, 0), ofVec3f(universe->pos.x, universe->pos.y, universe->pos.z-1000));
     
     
-    ofCamera *c = &universe->cam;
-
-    
-    ofVec3f t = ofVec3f(universe->pos.x, universe->pos.y, universe->pos.z-1000);
-    cout << "t = " << t << endl;
-//    ofDrawCircle(t.x, t.y, t.z);
-    
-    ofQuaternion curRot = ofQuaternion(0, c->getXAxis(), mouseX-mouseRange, c->getYAxis(), 0, c->getZAxis());
-//    setPosition((prevPosition-target.getGlobalPosition())*curRot +target.getGlobalPosition());
-    c->setPosition((downPosition-t)*curRot +t);
-    c->setOrientation(downOrientation * curRot);
+//    ofCamera *c = &universe->cam;
+//    ofVec3f t = ofVec3f(universe->pos.x, universe->pos.y, universe->pos.z-1000);
+//    cout << "t = " << t << endl;
+////    ofDrawCircle(t.x, t.y, t.z);
+//    
+//    ofQuaternion curRot = ofQuaternion(0, c->getXAxis(), mouseX-mouseRange, c->getYAxis(), 0, c->getZAxis());
+////    setPosition((prevPosition-target.getGlobalPosition())*curRot +target.getGlobalPosition());
+//    c->setPosition((downPosition-t)*curRot +t);
+//    c->setOrientation(downOrientation * curRot);
 //
 //    
 //    cout << "rotating " << mouseX-mouseRange << " deg"<< endl;
-    
+
+    control.mouseDragged(x, y, button);
 }
 
 //--------------------------------------------------------------
@@ -185,11 +195,13 @@ void ofApp::mousePressed(int x, int y, int button){
     downPosition = universe->cam.getPosition(); // ofCamera::getGlobalPosition();
     cout << "cam pos = " << downPosition << endl;
     downOrientation = universe->cam.getOrientationQuat(); // ofCamera::getGlobalOrientation();
+    
+    control.mousePressed(x, y, button);
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-    
+    control.mouseReleased(x, y, button);
 }
 
 //--------------------------------------------------------------
