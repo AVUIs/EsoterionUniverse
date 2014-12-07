@@ -12,6 +12,9 @@
 #include "ofMain.h"
 #include "ECUBaseObject.h"
 
+#define HOST "localhost"
+#define PORT 12345
+
 class ecuaObject : public ECUBaseObject {
     
 public:
@@ -20,7 +23,7 @@ public:
     ~ecuaObject();
 
     void setup(ofVec3f _p, int _id);
-    void update();
+    void update(float _distance);
     void draw();
     void setWarmth(float _warmth);
     void setSize(int _size);
@@ -28,11 +31,11 @@ public:
     void setOscillation(float _oscillation);
     
     void seParam(int _param, float _val);
-
+/*
     ofSpherePrimitive sphere;
     ofLight pointLight2;
     ofMaterial material;
-
+*/
     float   objWarmth;
     ofColor objColor;
     int     objSize;

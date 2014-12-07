@@ -29,6 +29,12 @@ ECUUniverse::~ECUUniverse() {
 
 }
 
+void ECUUniverse::update() {
+    for (vector<ECUBaseObject*>::iterator it = objects.begin(); it != objects.end(); ++it) {
+        (*it)->update();
+    }
+}
+
 void ECUUniverse::draw() {
     
 
