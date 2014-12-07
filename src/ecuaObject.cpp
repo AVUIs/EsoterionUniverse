@@ -34,7 +34,7 @@ void ecuaObject::setup(ofVec3f _p, int _id) {
     id = _id;
 }
 
-void ecuaObject::update(float _distance) {
+void ecuaObject::update() {
   
     if (sender!=NULL) {
         float curSize = objSize + (objSize * objAmplitude * cos(ofGetElapsedTimef()*objOscillation));
@@ -56,8 +56,10 @@ void ecuaObject::update(float _distance) {
         sender->sendMessage(m);
         m.clear();
         m.setAddress("/object/distance");
-        m.addFloatArg(_distance);
+        m.addFloatArg(distToCenter);
         sender->sendMessage(m);
+        
+        
         
     }
 

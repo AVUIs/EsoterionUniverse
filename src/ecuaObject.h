@@ -23,7 +23,7 @@ public:
     ~ecuaObject();
 
     void setup(ofVec3f _p, int _id);
-    void update(float _distance);
+    void update();
     void draw();
     void setWarmth(float _warmth);
     void setSize(int _size);
