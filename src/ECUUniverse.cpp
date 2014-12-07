@@ -57,7 +57,7 @@ void ECUUniverse::draw() {
         
         ofVec3f a = cam.worldToScreen((*it)->pos);
         
-        ofDrawCircle(a.x, a.y, 20);
+//        ofDrawCircle(a.x, a.y, 20);
         
     }
     
@@ -98,6 +98,7 @@ int ECUUniverse::addObject(ECUBaseObject *object) {
 //    int id = objects.size();
 //    objects[1] = object;
 //     objects.insert(pair<int,ECUBaseObject*>(id, object));
+    object->universeRef = this;
     objects.push_back(object);
 }
 

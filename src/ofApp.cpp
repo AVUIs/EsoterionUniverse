@@ -39,6 +39,9 @@ void ofApp::draw(){
     ofSetColor(255);
     universe->draw();
     
+//    ofVec3f t = ofVec3f(universe->pos.x, universe->pos.y, universe->pos.z-mouseY*10);
+//    ofDrawCircle(t.x, t.y, t.z);
+    
 //    cam.begin();
 //    cam.end();
     
@@ -113,23 +116,28 @@ void ofApp::mouseMoved(int x, int y){
     
 }
 
+ofVec3f downPosition;
+ofQuaternion downOrientation;
+
 float mouseRange = 0;
 
 void ofApp::mouseDragged(int x, int y, int button) {
     
-    universe->cam.rotateAround(mouseX-mouseRange, ofVec3f(0, 1, 0), ofVec3f(universe->pos.x, universe->pos.y, universe->pos.z-1000));
+    return;
+//    universe->cam.rotateAround(mouseX-mouseRange, ofVec3f(0, 1, 0), ofVec3f(universe->pos.x, universe->pos.y, universe->pos.z-1000));
     
     
-//    ofCamera *c = &universe->cam;
-//    ofVec3f prevPosition = c->getPosition(); // ofCamera::getGlobalPosition();
-//    ofQuaternion prevOrientation = c->getOrientationQuat(); // ofCamera::getGlobalOrientation();
-//    
-//    ofVec3f t = ofVec3f(universe->pos.x, universe->pos.y, universe->pos.z-1000);
-//    
-//    ofQuaternion curRot = ofQuaternion(0, c->getXAxis(), (mouseX > ofGetWidth()/2) ? 1 : -1, c->getYAxis(), 0, c->getZAxis());
-////    setPosition((prevPosition-target.getGlobalPosition())*curRot +target.getGlobalPosition());
-//    c->setPosition((prevPosition-t)*curRot +t);
-//    c->setOrientation(prevOrientation * curRot);
+    ofCamera *c = &universe->cam;
+
+    
+    ofVec3f t = ofVec3f(universe->pos.x, universe->pos.y, universe->pos.z+mouseY*10);
+    
+    ofDrawCircle(t.x, t.y, t.z);
+    
+    ofQuaternion curRot = ofQuaternion(0, c->getXAxis(), mouseX-mouseRange, c->getYAxis(), 0, c->getZAxis());
+//    setPosition((prevPosition-target.getGlobalPosition())*curRot +target.getGlobalPosition());
+    c->setPosition((downPosition-t)*curRot +t);
+    c->setOrientation(downOrientation * curRot);
 //
 //    
 //    cout << "rotating " << mouseX-mouseRange << " deg"<< endl;
@@ -157,6 +165,8 @@ void ofApp::mouseScrolled(float x, float y) {
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
     mouseRange = mouseX;
+    downPosition = universe->cam.getPosition(); // ofCamera::getGlobalPosition();
+    downOrientation = universe->cam.getOrientationQuat(); // ofCamera::getGlobalOrientation();
 }
 
 //--------------------------------------------------------------

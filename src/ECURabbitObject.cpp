@@ -8,7 +8,10 @@
 
 #include "ECURabbitObject.h"
 
-//only load the mesh file once
+#include "ECUUniverse.h"
+
+bool fileLoaded = false;
+ofMesh mesh;
 
 
 ECURabbitObject::ECURabbitObject(ofVec3f p) {
@@ -28,12 +31,19 @@ void ECURabbitObject::draw() {
     
     ofPushMatrix();
     ofTranslate(pos);
-    ofSetColor(ofColor::gray);
-  
-    mesh.drawWireframe();
+    
+//    ofSetColor(ofColor::gray);  
+//    mesh.drawWireframe();
+    
     glPointSize(2);
-    ofSetColor(ofColor::white);
+    ofSetColor(ofColor::gray);
     mesh.drawVertices();
+    
+    ofSetColor(ofColor::white);
+    ofDrawBitmapString("pos = " + ofToString(pos), 10, 10);
+    float d = pos.distance(universeRef->pos);
+    ofDrawBitmapString("dist = " + ofToString(d), 10, 20);
+//    ofdrawbi
     
     ofPopMatrix();
     

@@ -17,8 +17,7 @@ public:
     
     void draw();
     
-    bool fileLoaded = false;
-    ofMesh mesh;
+    
 
     
 };

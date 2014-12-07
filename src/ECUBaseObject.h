@@ -10,9 +10,11 @@
 
 #include "ofMain.h"
 
+class ECUUniverse;
+
 class ECUBaseObject {
 public:
-    ECUBaseObject() {
+    ECUBaseObject(ECUUniverse *uni=NULL): universeRef(uni) {
         
     }
     
@@ -21,4 +23,6 @@ public:
     virtual void draw() {}
     
     ofVec3f pos;
+    
+    ECUUniverse *universeRef;
 };
