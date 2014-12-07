@@ -19,10 +19,10 @@ class ecuaObject : public ECUBaseObject {
     
 public:
 
-    ecuaObject(ofVec3f _p, int _id);
+    ecuaObject(ofVec3f _p);
     ~ecuaObject();
 
-    void setup(ofVec3f _p, int _id);
+    void setup(ofVec3f _p, int _id=0);
     void update();
     void draw();
     void setWarmth(float _warmth);
@@ -30,7 +30,7 @@ public:
     void setSharpness(int _sharpness);
     void setOscillation(float _oscillation);
     
-    void seParam(int _param, float _val);
+    void setParam(int _param, float _val);
 /*
     ofSpherePrimitive sphere;
     ofMaterial material;

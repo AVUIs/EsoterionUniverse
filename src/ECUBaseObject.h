@@ -19,11 +19,10 @@ public:
     }
     
     virtual ~ECUBaseObject() {}
-    
-    virtual void update() {}
 
+    virtual void update() {}
     virtual void draw() {}
-    
+    virtual void setParam(int _param, float _val) {}
 //    virtual void sendOSc();
     
     

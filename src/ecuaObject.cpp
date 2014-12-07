@@ -11,8 +11,8 @@
 
 static ofxOscSender *sender = NULL;        //KX each obj same sender
 
-ecuaObject::ecuaObject(ofVec3f _p, int _id) {
-    setup(_p, _id);
+ecuaObject::ecuaObject(ofVec3f _p) {
+    setup(_p);
     if (sender==NULL) {
         sender = new ofxOscSender();
         sender->setup(HOST, PORT);
@@ -96,7 +96,7 @@ void ecuaObject::setOscillation(float _oscillation) {
     objOscillation = _oscillation;
 }
 
-void ecuaObject::seParam(int _param, float _val) {
+void ecuaObject::setParam(int _param, float _val) {
     switch (_param) {
         case 0:
         objWarmth = ofMap(_val, 0.0, 1.0, 0, 128, true);

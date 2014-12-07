@@ -11,9 +11,8 @@ void ofApp::setup(){
 //    mesh.load("lofi-bunny.ply");
     
 //    cout << cam.getTarget().getPosition() << endl;
-    curObj = 0;
     universe = new ECUUniverse();
-    universe->addObject(new ecuaObject(ofVec3f(0, 0, -1000), curObj));
+    universe->addObject(new ecuaObject(ofVec3f(0, 0, -1000)));
     //    cam.disableMouseInput();
     
     //    cam.set
@@ -60,12 +59,28 @@ void ofApp::draw(){
     ofDisableLighting();
     ofDisableDepthTest();
     
-    control.draw();
+    if(creatingObject) {
+        control.draw();
+    }
 }
 
 bool zDown = false;
 
 #define KEY(k, f) if(key == (k)) { (f); }
+
+void ofApp::createObject() {
+    
+    if(creatingObject) {
+        //we are now going to turn off, this means that we need to place the object in
+        ECUBaseObject *obj = new ecuaObject(ofVec3f(universe->pos.x, universe->pos.y, universe->pos.z-1000));
+        for (int i = 0; i < control.amnt; i++) {
+            obj->setParam(i, control.fadersPos[i]);
+        }
+        universe->addObject(obj);
+    }
+
+    creatingObject = !creatingObject;
+}
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
@@ -73,7 +88,7 @@ void ofApp::keyPressed(int key){
     
     KEY('z', zDown = true)
     
-    KEY('a', universe->addObject(new ecuaObject(ofVec3f(universe->pos.x, universe->pos.y, universe->pos.z-1000), curObj++)))
+    KEY('a', createObject())
     
     cout << "current pos = " << universe->pos << endl;
     cout << "there are " << universe->objects.size() << " objects" << endl;
@@ -120,6 +135,8 @@ void ofApp::mousePressed(int x, int y, int button){
     downOrientation = universe->cam.getOrientationQuat(); // ofCamera::getGlobalOrientation();
     
     control.mousePressed(x, y, button);
+    
+//    universe
 }
 
 //--------------------------------------------------------------

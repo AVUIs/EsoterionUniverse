@@ -5,6 +5,9 @@
 #include "ECUUniverse.h"
 #include "ctrls.h"
 
+enum {
+    CREATING, CREATED
+};
 
 class ofApp : public ofBaseApp{
 	public:
@@ -26,6 +29,7 @@ class ofApp : public ofBaseApp{
     ofLight pointLight2;
 
     
+    void createObject();
     
     ECUUniverse *universe;
     ctrls control;

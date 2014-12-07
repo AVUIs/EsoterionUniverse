@@ -27,6 +27,19 @@
 		E7E077E815D3B6510020DFD4 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E715D3B6510020DFD4 /* QTKit.framework */; };
 		E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F985F515E0DE99003869B5 /* Accelerate.framework */; };
 		EE264D051A348DBC00ADE8AC /* ecuaObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE264D031A348DBC00ADE8AC /* ecuaObject.cpp */; };
+		EE264D321A34AB4300ADE8AC /* IpEndpointName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE264D0C1A34A31E00ADE8AC /* IpEndpointName.cpp */; };
+		EE264D331A34AB4300ADE8AC /* NetworkingUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE264D111A34A31E00ADE8AC /* NetworkingUtils.cpp */; };
+		EE264D341A34AB4300ADE8AC /* UdpSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE264D121A34A31E00ADE8AC /* UdpSocket.cpp */; };
+		EE264D351A34AB4300ADE8AC /* OscOutboundPacketStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE264D1C1A34A31E00ADE8AC /* OscOutboundPacketStream.cpp */; };
+		EE264D361A34AB4300ADE8AC /* OscPrintReceivedElements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE264D1F1A34A31E00ADE8AC /* OscPrintReceivedElements.cpp */; };
+		EE264D371A34AB4300ADE8AC /* OscReceivedElements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE264D211A34A31E00ADE8AC /* OscReceivedElements.cpp */; };
+		EE264D381A34AB4300ADE8AC /* OscTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE264D231A34A31E00ADE8AC /* OscTypes.cpp */; };
+		EE264D391A34ABBB00ADE8AC /* ofxOscBundle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE264D281A34A31E00ADE8AC /* ofxOscBundle.cpp */; };
+		EE264D3B1A34ABBB00ADE8AC /* ofxOscReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE264D2E1A34A31E00ADE8AC /* ofxOscReceiver.cpp */; };
+		EE264D3C1A34ABBB00ADE8AC /* ofxOscSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE264D301A34A31E00ADE8AC /* ofxOscSender.cpp */; };
+		EE264D3D1A34ACB700ADE8AC /* ofxOscMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE264D2A1A34A31E00ADE8AC /* ofxOscMessage.cpp */; };
+		EE264D3E1A34ACB700ADE8AC /* ofxOscParameterSync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE264D2C1A34A31E00ADE8AC /* ofxOscParameterSync.cpp */; };
+		EE264D461A34B37200ADE8AC /* ctrls.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE264D441A34B37200ADE8AC /* ctrls.cpp */; };
 		EEF7DEFB1A33668B00B9DE2B /* ECUUniverse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EEF7DEF91A33668A00B9DE2B /* ECUUniverse.cpp */; };
 		EEF7DEFF1A33695100B9DE2B /* ECURabbitObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EEF7DEFE1A33695100B9DE2B /* ECURabbitObject.cpp */; };
 /* End PBXBuildFile section */
@@ -122,6 +135,8 @@
 		EE264D2F1A34A31E00ADE8AC /* ofxOscReceiver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxOscReceiver.h; sourceTree = "<group>"; };
 		EE264D301A34A31E00ADE8AC /* ofxOscSender.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxOscSender.cpp; sourceTree = "<group>"; };
 		EE264D311A34A31E00ADE8AC /* ofxOscSender.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxOscSender.h; sourceTree = "<group>"; };
+		EE264D441A34B37200ADE8AC /* ctrls.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ctrls.cpp; sourceTree = "<group>"; };
+		EE264D451A34B37200ADE8AC /* ctrls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ctrls.h; sourceTree = "<group>"; };
 		EEF7DEF91A33668A00B9DE2B /* ECUUniverse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ECUUniverse.cpp; sourceTree = "<group>"; };
 		EEF7DEFA1A33668A00B9DE2B /* ECUUniverse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECUUniverse.h; sourceTree = "<group>"; };
 		EEF7DEFC1A3366ED00B9DE2B /* ECUBaseObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ECUBaseObject.h; sourceTree = "<group>"; };
@@ -226,6 +241,8 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				EE264D441A34B37200ADE8AC /* ctrls.cpp */,
+				EE264D451A34B37200ADE8AC /* ctrls.h */,
 				EE264D031A348DBC00ADE8AC /* ecuaObject.cpp */,
 				EE264D041A348DBC00ADE8AC /* ecuaObject.h */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
@@ -443,6 +460,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE264D461A34B37200ADE8AC /* ctrls.cpp in Sources */,
+				EE264D3D1A34ACB700ADE8AC /* ofxOscMessage.cpp in Sources */,
+				EE264D3E1A34ACB700ADE8AC /* ofxOscParameterSync.cpp in Sources */,
+				EE264D391A34ABBB00ADE8AC /* ofxOscBundle.cpp in Sources */,
+				EE264D3B1A34ABBB00ADE8AC /* ofxOscReceiver.cpp in Sources */,
+				EE264D3C1A34ABBB00ADE8AC /* ofxOscSender.cpp in Sources */,
+				EE264D321A34AB4300ADE8AC /* IpEndpointName.cpp in Sources */,
+				EE264D331A34AB4300ADE8AC /* NetworkingUtils.cpp in Sources */,
+				EE264D341A34AB4300ADE8AC /* UdpSocket.cpp in Sources */,
+				EE264D351A34AB4300ADE8AC /* OscOutboundPacketStream.cpp in Sources */,
+				EE264D361A34AB4300ADE8AC /* OscPrintReceivedElements.cpp in Sources */,
+				EE264D371A34AB4300ADE8AC /* OscReceivedElements.cpp in Sources */,
+				EE264D381A34AB4300ADE8AC /* OscTypes.cpp in Sources */,
 				EEF7DEFF1A33695100B9DE2B /* ECURabbitObject.cpp in Sources */,
 				EEF7DEFB1A33668B00B9DE2B /* ECUUniverse.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
@@ -544,6 +574,11 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = NONE;
+				HEADER_SEARCH_PATHS = (
+					"$(OF_CORE_HEADERS)",
+					src,
+					../../../addons/ofxOsc/libs/oscpack/src,
+				);
 				ICON = "$(ICON_NAME_DEBUG)";
 				ICON_FILE = "$(ICON_FILE_PATH)$(ICON)";
 				INFOPLIST_FILE = "openFrameworks-Info.plist";
@@ -629,6 +664,11 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../libs/glut/lib/osx\"";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = NONE;
+				HEADER_SEARCH_PATHS = (
+					"$(OF_CORE_HEADERS)",
+					src,
+					../../../addons/ofxOsc/libs/oscpack/src,
+				);
 				ICON = "$(ICON_NAME_RELEASE)";
 				ICON_FILE = "$(ICON_FILE_PATH)$(ICON)";
 				INFOPLIST_FILE = "openFrameworks-Info.plist";

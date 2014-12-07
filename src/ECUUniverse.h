@@ -22,6 +22,7 @@ public:
     int addObject(ECUBaseObject *object);
     
     
+    
     ofCamera cam;
 //    map<int, ECUBaseObject*> objects;
     vector<ECUBaseObject*> objects;
