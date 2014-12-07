@@ -44,19 +44,13 @@ void ECUUniverse::draw() {
     ofSetColor(255);
     cam.begin();
     
-//    for(map<int, ECUBaseObject*>::iterator it = objects.begin(); it != objects.end(); ++it) {
-//        it->second->draw();
-//    }
 
 
     for (vector<ECUBaseObject*>::iterator it = objects.begin(); it != objects.end(); ++it) {
         (*it)->draw();
     }
     
-//    for(int i = 0; i < objects.size(); i++) {
-//        objects[i]->draw();
-//    }
-    
+
     cam.end();
 
     for (vector<ECUBaseObject*>::iterator it = objects.begin(); it != objects.end(); ++it) {
@@ -79,34 +73,7 @@ void ECUUniverse::draw() {
     }
     
 
-//    ofVec3f a = cam.worldToScreen(ofVec3f(0, 0, 0));
 
-//    ofDrawCircle(a.x, a.y, 20);
-//    cout << a.x << ", " << a.y << endl;
-    
-//    int n = mesh.getNumVertices();
-//    float nearestDistance = 0;
-//    ofVec2f nearestVertex;
-//    int nearestIndex = 0;
-//    ofVec2f mouse(mouseX, mouseY);
-//    for(int i = 0; i < n; i++) {
-//        ofVec3f cur = cam.worldToScreen(mesh.getVertex(i));
-//        float distance = cur.distance(mouse);
-//        if(i == 0 || distance < nearestDistance) {
-//            nearestDistance = distance;
-//            nearestVertex = cur;
-//            nearestIndex = i;
-//        }
-//    }
-//    
-//    ofSetColor(ofColor::gray);
-//    ofLine(nearestVertex, mouse);
-//    
-//    ofNoFill();
-//    ofSetColor(ofColor::yellow);
-//    ofSetLineWidth(2);
-//    ofCircle(nearestVertex, 4);
-//    ofSetLineWidth(1);
 
     
 }
