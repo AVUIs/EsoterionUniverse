@@ -22,6 +22,12 @@ void ofApp::setup(){
     pointLight2.setSpecularColor(ofFloatColor(10, 10, 10));
     pointLight2.setPosition(120, 80, 500);
 
+<<<<<<< HEAD
+=======
+
+    currentEditingObj = NULL;
+    
+>>>>>>> b2dd5efc5cac1a8e1fe86c0dd15be4646f103e27
 //    ofAddListener(ofEvent::mousePressed, &control, control::mousePressed)
 //    ofAddListener(ofEvents().mouseDragged , &control, &ctrls::mouseDragged);
 //    ofAddListener(ofEvents().mousePressed, &control, &ctrls::mousePressed);
@@ -57,7 +63,7 @@ void ofApp::draw(){
     ofDisableLighting();
     ofDisableDepthTest();
     
-    if(creatingObject) {
+    if(currentEditingObj != NULL) {
         control.draw();
     }
 }
@@ -68,16 +74,18 @@ bool zDown = false;
 
 void ofApp::createObject() {
     
-    if(creatingObject) {
+    if(currentEditingObj != NULL) {
         //we are now going to turn off, this means that we need to place the object in
-        ECUBaseObject *obj = new ecuaObject(ofVec3f(universe->pos.x, universe->pos.y, universe->pos.z-1000));
-        for (int i = 0; i < control.amnt; i++) {
-            obj->setParam(i, control.fadersPos[i]);
-        }
-        universe->addObject(obj);
+        currentEditingObj = NULL;
     }
 
-    creatingObject = !creatingObject;
+    else {
+        ECUBaseObject *obj = new ecuaObject(ofVec3f(universe->pos.x, universe->pos.y, universe->pos.z-1000));
+        currentEditingObj = obj;
+        universe->addObject(obj);
+    }
+    
+//    creatingObject = !creatingObject;
 }
 
 //--------------------------------------------------------------
@@ -87,6 +95,8 @@ void ofApp::keyPressed(int key){
     KEY('z', zDown = true)
     
     KEY('a', createObject())
+    
+//    KEY('s', currentEditingObj = NULL)
     
     cout << "current pos = " << universe->pos << endl;
     cout << "there are " << universe->objects.size() << " objects" << endl;
@@ -111,6 +121,14 @@ float mouseRange = 0;
 void ofApp::mouseDragged(int x, int y, int button) {
 
     control.mouseDragged(x, y, button);
+    
+    for (int i = 0; i < control.amnt; i++) {
+        currentEditingObj->setParam(i, control.fadersPos[i]);
+        
+        //if we found an object, set the of the control to the object so there is no jump
+        
+    }
+
 }
 
 //--------------------------------------------------------------
@@ -134,7 +152,16 @@ void ofApp::mousePressed(int x, int y, int button){
     
     control.mousePressed(x, y, button);
     
-//    universe
+    if(currentEditingObj == NULL) {
+        currentEditingObj = universe->findEditObject(x, y);
+        
+        if (currentEditingObj != NULL) {
+            //if we found an object, set the of the control to the object so there is no jump
+            for (int i = 0; i < control.amnt; i++) {
+                control.fadersPos[i] = currentEditingObj->getParam(i);
+            }
+        }
+    }
 }
 
 //--------------------------------------------------------------

@@ -21,6 +21,7 @@ public:
     void draw();
     int addObject(ECUBaseObject *object);
     
+    ECUBaseObject* findEditObject(float x, float y);
     
     
     ofCamera cam;

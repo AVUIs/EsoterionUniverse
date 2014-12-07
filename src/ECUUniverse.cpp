@@ -69,9 +69,6 @@ void ECUUniverse::draw() {
 //        ofDrawCircle(a.x, a.y, 20);
         
     }
-    
-
-
 
     
 }
@@ -85,3 +82,19 @@ int ECUUniverse::addObject(ECUBaseObject *object) {
     objects.push_back(object);
 }
 
+#define DIST_TO_SELECT 40
+
+ECUBaseObject* ECUUniverse::findEditObject(float x, float y) {
+    
+    //this is a hackathon, so no fancy search
+    for (vector<ECUBaseObject*>::iterator it = objects.begin(); it != objects.end(); ++it) {
+        ofVec3f screenPos = cam.worldToScreen((*it)->pos);
+        ofPoint screenPos2 = ofPoint(screenPos.x, screenPos.y); //in 2D
+        float d = screenPos.distance(ofVec2f(x, y));
+        cout << d << endl;
+        if (d  < DIST_TO_SELECT) {
+            return *it;
+        }
+    }
+    return NULL;
+}
