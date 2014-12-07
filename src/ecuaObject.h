@@ -33,7 +33,6 @@ public:
     void seParam(int _param, float _val);
 /*
     ofSpherePrimitive sphere;
-    ofLight pointLight2;
     ofMaterial material;
 */
     float   objWarmth;

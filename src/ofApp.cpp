@@ -13,10 +13,17 @@ void ofApp::setup(){
 //    cout << cam.getTarget().getPosition() << endl;
     curObj = 0;
     universe = new ECUUniverse();
-    universe->addObject(new ecuaObject(ofVec3f(), curObj));
+    universe->addObject(new ecuaObject(ofVec3f(0, 0, -1000), curObj));
     //    cam.disableMouseInput();
     
     //    cam.set
+    
+    ofSetSmoothLighting(true);
+    pointLight2.setDiffuseColor( ofFloatColor(.3, .3, .3));
+    pointLight2.setSpecularColor(ofFloatColor(10, 10, 10));
+    pointLight2.setPosition(120, 80, 500);
+
+
 
 }
 
@@ -36,8 +43,21 @@ void ofApp::draw(){
     //    cout << cam.getPosition() << endl;
 //    cam.setPosition(p.x, p.y, p.z);
     
+    
+    
     ofSetColor(255);
+    
+    ofEnableDepthTest();
+    ofEnableLighting();
+    pointLight2.enable();
+    
     universe->draw();
+    
+    ofDisableLighting();
+    ofDisableDepthTest();
+    
+//    ofVec3f t = ofVec3f(universe->pos.x, universe->pos.y, universe->pos.z-mouseY*10);
+//    ofDrawCircle(t.x, t.y, t.z);
     
 //    cam.begin();
 //    cam.end();
@@ -113,23 +133,28 @@ void ofApp::mouseMoved(int x, int y){
     
 }
 
+ofVec3f downPosition;
+ofQuaternion downOrientation;
+
 float mouseRange = 0;
 
 void ofApp::mouseDragged(int x, int y, int button) {
     
-    universe->cam.rotateAround(mouseX-mouseRange, ofVec3f(0, 1, 0), ofVec3f(universe->pos.x, universe->pos.y, universe->pos.z-1000));
+//    return;
+//    universe->cam.rotateAround(mouseX-mouseRange, ofVec3f(0, 1, 0), ofVec3f(universe->pos.x, universe->pos.y, universe->pos.z-1000));
     
     
-//    ofCamera *c = &universe->cam;
-//    ofVec3f prevPosition = c->getPosition(); // ofCamera::getGlobalPosition();
-//    ofQuaternion prevOrientation = c->getOrientationQuat(); // ofCamera::getGlobalOrientation();
-//    
-//    ofVec3f t = ofVec3f(universe->pos.x, universe->pos.y, universe->pos.z-1000);
-//    
-//    ofQuaternion curRot = ofQuaternion(0, c->getXAxis(), (mouseX > ofGetWidth()/2) ? 1 : -1, c->getYAxis(), 0, c->getZAxis());
-////    setPosition((prevPosition-target.getGlobalPosition())*curRot +target.getGlobalPosition());
-//    c->setPosition((prevPosition-t)*curRot +t);
-//    c->setOrientation(prevOrientation * curRot);
+    ofCamera *c = &universe->cam;
+
+    
+    ofVec3f t = ofVec3f(universe->pos.x, universe->pos.y, universe->pos.z-1000);
+    cout << "t = " << t << endl;
+//    ofDrawCircle(t.x, t.y, t.z);
+    
+    ofQuaternion curRot = ofQuaternion(0, c->getXAxis(), mouseX-mouseRange, c->getYAxis(), 0, c->getZAxis());
+//    setPosition((prevPosition-target.getGlobalPosition())*curRot +target.getGlobalPosition());
+    c->setPosition((downPosition-t)*curRot +t);
+    c->setOrientation(downOrientation * curRot);
 //
 //    
 //    cout << "rotating " << mouseX-mouseRange << " deg"<< endl;
@@ -157,6 +182,9 @@ void ofApp::mouseScrolled(float x, float y) {
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
     mouseRange = mouseX;
+    downPosition = universe->cam.getPosition(); // ofCamera::getGlobalPosition();
+    cout << "cam pos = " << downPosition << endl;
+    downOrientation = universe->cam.getOrientationQuat(); // ofCamera::getGlobalOrientation();
 }
 
 //--------------------------------------------------------------
