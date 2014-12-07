@@ -45,7 +45,6 @@ void ECUUniverse::draw() {
     cam.begin();
     
 
-
     for (vector<ECUBaseObject*>::iterator it = objects.begin(); it != objects.end(); ++it) {
         (*it)->draw();
     }
@@ -63,7 +62,6 @@ void ECUUniverse::draw() {
             (*it)->distToCam = (*it)->pos.distance(this->pos);
             ofVec2f screenCenter(ofGetWidth()>>1, ofGetHeight()>>1);
             (*it)->distToCenter = screenCenter.distance(screenPos2);
-        
             
             ofDrawBitmapString("dtc = " + ofToString(((*it)->distToCam)) + ", " + ofToString((*it)->distToCenter),  screenPos.x, screenPos.y);
         }

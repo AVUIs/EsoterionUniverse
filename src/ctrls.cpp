@@ -103,12 +103,12 @@ void ctrls::mouseDragged(int x, int y, int button){
             
             float zeroDist = ofDist(mouseX,mouseY,0,0);
             if(dragged && zeroDist > innerCircle){
-                cout<<ofDist(mouseX,mouseY,xMin[i],yMin[i])+innerCircle<<endl;
+  //              cout<<ofDist(mouseX,mouseY,xMin[i],yMin[i])+innerCircle<<endl;
                 
                 float val = ofMap(   ofDist(mouseX,mouseY,xMin[i],yMin[i])+innerCircle   , 0, len[i], 0, 1);
                 
                 val = ofClamp(val,0,1);
-                cout<<len[i]<<"  "<<val<<endl;
+//                cout<<len[i]<<"  "<<val<<endl;
                 
                 xPos[i] = val * xMax[i];
                 yPos[i] = val * yMax[i];

@@ -22,7 +22,6 @@ void ofApp::setup(){
     pointLight2.setSpecularColor(ofFloatColor(10, 10, 10));
     pointLight2.setPosition(120, 80, 500);
 
-
 //    ofAddListener(ofEvent::mousePressed, &control, control::mousePressed)
 //    ofAddListener(ofEvents().mouseDragged , &control, &ctrls::mouseDragged);
 //    ofAddListener(ofEvents().mousePressed, &control, &ctrls::mousePressed);
@@ -30,7 +29,6 @@ void ofApp::setup(){
 //    ofAddListener(ofEvents().mouseScrolled, &control, &ctrls::mouseScrolled);
 
 //    ofRegisterMouseEvents(control);
-    
 
 }
 

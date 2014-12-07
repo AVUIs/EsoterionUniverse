@@ -20,10 +20,14 @@ ecuaObject::ecuaObject(ofVec3f _p) {
 }
 
 ecuaObject::~ecuaObject() {
-    if (sender!=NULL) delete sender;
+    if (sender!=NULL) {
+        delete sender;
+        sender = NULL;
+    }
 }
 
 void ecuaObject::setup(ofVec3f _p, int _id) {
+
     objWarmth = 100;
     objColor.setHsb(objWarmth, 255, 255);
     objSize = 100;
@@ -58,26 +62,23 @@ void ecuaObject::update() {
         m.setAddress("/object/distance");
         m.addFloatArg(distToCenter);
         sender->sendMessage(m);
-        
-        
-        
     }
-
 }
 
 void ecuaObject::draw() {
     float spinX = sin(ofGetElapsedTimef()*.35f);
     float spinY = cos(ofGetElapsedTimef()*.075f);
 
-    ofPushMatrix();
-    ofRotate(spinX, 1.0, 0.0, 0.0);
-    ofRotate(spinY, 0.0, 1.0, 0.0);
+//    ofPushMatrix();
+  //  ofRotate(spinX, 1.0, 0.0, 0.0);
+   // ofRotate(spinY, 0.0, 1.0, 0.0);
     objColor.setHsb(objWarmth, 255, 255);
+    ofFill();
     ofSetSphereResolution(objSharpness);
     ofSetColor(objColor);
     float curSize = objSize + (objSize * objAmplitude * cos(ofGetElapsedTimef()*objOscillation));
     ofDrawSphere(pos, curSize);
-    ofPopMatrix();
+//    ofPopMatrix();
 }
 
 void ecuaObject::setWarmth(float _warmth) {
@@ -97,7 +98,7 @@ void ecuaObject::setOscillation(float _oscillation) {
 }
 
 void ecuaObject::setParam(int _param, float _val) {
-    switch (_param) {
+/*    switch (_param) {
         case 0:
         objWarmth = ofMap(_val, 0.0, 1.0, 0, 128, true);
         break;
@@ -109,6 +110,23 @@ void ecuaObject::setParam(int _param, float _val) {
         break;
         case 3:
         objOscillation = ofMap(_val, 0.0, 1.0, 0, 100.0, true);
+        break;
+        default:
+        break;
+    }
+*/
+    switch (_param) {
+        case 0:
+        objWarmth = ofMap(_val, 0.3, 1.0, 0, 128, true);
+        break;
+        case 1:
+        objSize = ofMap(_val, 0.3, 1.0, 10, 300, true);
+        break;
+        case 2:
+        objSharpness = ofMap(_val, 0.3, 1.0, 2, 42, true);
+        break;
+        case 3:
+        objOscillation = ofMap(_val, 0.3, 1.0, 0, 100.0, true);
         break;
         default:
         break;
