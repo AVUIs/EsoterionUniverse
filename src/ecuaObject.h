@@ -31,6 +31,8 @@ public:
     void setOscillation(float _oscillation);
     
     void setParam(int _param, float _val);
+    float getParam(int _param);
+
 /*
     ofSpherePrimitive sphere;
     ofMaterial material;

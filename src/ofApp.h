@@ -9,6 +9,8 @@ enum {
     CREATING, CREATED
 };
 
+class ECUBaseObject;
+
 class ofApp : public ofBaseApp{
 	public:
 		void setup();
@@ -30,6 +32,8 @@ class ofApp : public ofBaseApp{
 
     
     void createObject();
+    ECUBaseObject *currentEditingObj;
+    
     
     ECUUniverse *universe;
     ctrls control;
