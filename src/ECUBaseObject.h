@@ -10,19 +10,18 @@
 
 #include "ofMain.h"
 
-class ECUUniverse;
-
 class ECUBaseObject {
 public:
-    ECUBaseObject(ECUUniverse *uni=NULL): universeRef(uni) {
+    ECUBaseObject() {
         
     }
     
     virtual ~ECUBaseObject() {}
     
+    virtual void update() {}
+
     virtual void draw() {}
     
     ofVec3f pos;
-    
-    ECUUniverse *universeRef;
+    int id;
 };

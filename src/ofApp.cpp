@@ -1,6 +1,7 @@
 #include "ofApp.h"
 
-#include "ECURabbitObject.h"
+//#include "ECURabbitObject.h"
+#include "ecuaObject.h"
 
 ofVec3f p;
 
@@ -10,9 +11,9 @@ void ofApp::setup(){
 //    mesh.load("lofi-bunny.ply");
     
 //    cout << cam.getTarget().getPosition() << endl;
-
+    curObj = 0;
     universe = new ECUUniverse();
-    universe->addObject(new ECURabbitObject);
+    universe->addObject(new ecuaObject(ofVec3f(), curObj));
     //    cam.disableMouseInput();
     
     //    cam.set
@@ -99,7 +100,7 @@ void ofApp::keyPressed(int key){
     
     KEY('z', zDown = true)
     
-    KEY('a', universe->addObject(new ECURabbitObject(ofVec3f(universe->pos.x, universe->pos.y, universe->pos.z-1000))))
+    KEY('a', universe->addObject(new ecuaObject(ofVec3f(universe->pos.x, universe->pos.y, universe->pos.z-1000), curObj++)))
     
     cout << "current pos = " << universe->pos << endl;
     cout << "there are " << universe->objects.size() << " objects" << endl;
