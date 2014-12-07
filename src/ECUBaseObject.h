@@ -10,6 +10,8 @@
 
 #include "ofMain.h"
 
+class ECUUniverse;
+
 class ECUBaseObject {
 public:
     ECUBaseObject() {
@@ -22,6 +24,15 @@ public:
 
     virtual void draw() {}
     
+//    virtual void sendOSc();
+    
+    
     ofVec3f pos;
     int id;
+    
+    float distToCam;
+    float distToCenter;
+    
+    ECUUniverse *universeRef;
+    
 };

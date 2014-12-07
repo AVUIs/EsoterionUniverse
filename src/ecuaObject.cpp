@@ -11,6 +11,7 @@
 
 ecuaObject::ecuaObject(ofVec3f _p, int _id) {
     setup(_p, _id);
+    
 }
 
 ecuaObject::~ecuaObject() {
@@ -19,10 +20,6 @@ ecuaObject::~ecuaObject() {
 
 void ecuaObject::setup(ofVec3f _p, int _id) {
 
-    ofSetSmoothLighting(true);
-    pointLight2.setDiffuseColor( ofFloatColor(.3, .3, .3));
-    pointLight2.setSpecularColor(ofFloatColor(10, 10, 10));
-    pointLight2.setPosition(_p.x*1.2, _p.y*0.8, 500);
 
     // shininess is a value between 0 - 128, 128 being the most shiny //
     material.setShininess( 128 );
@@ -55,9 +52,7 @@ void ecuaObject::draw() {
     float spinX = sin(ofGetElapsedTimef()*.35f);
     float spinY = cos(ofGetElapsedTimef()*.075f);
     
-    ofEnableDepthTest();
-    ofEnableLighting();
-    pointLight2.enable();
+    
     material.begin();
 
     // Sphere //
@@ -68,8 +63,7 @@ void ecuaObject::draw() {
     sphere.draw();
 
     material.end();
-    ofDisableLighting();
-    ofDisableDepthTest();
+    
 }
 
 void ecuaObject::setWarmth(float _warmth) {
