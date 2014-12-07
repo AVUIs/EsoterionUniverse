@@ -48,12 +48,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofBackgroundGradient(ofColor(64), ofColor(0));
-    
-    //    cout << cam.getPosition() << endl;
-//    cam.setPosition(p.x, p.y, p.z);
-    
-    
-    
+
     ofSetColor(255);
     
     ofEnableDepthTest();
@@ -101,30 +96,19 @@ ofQuaternion downOrientation;
 float mouseRange = 0;
 
 void ofApp::mouseDragged(int x, int y, int button) {
-    
-//    return;
-//    universe->cam.rotateAround(mouseX-mouseRange, ofVec3f(0, 1, 0), ofVec3f(universe->pos.x, universe->pos.y, universe->pos.z-1000));
-    
-    
 
     control.mouseDragged(x, y, button);
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseScrolled(float x, float y) {
-    
-//    cout << "mouse dragged " << x << ", " << y << endl;
-    
-//    if (button == OF_MOUSE_BUTTON_3) {
-        if (zDown) {
-            universe->pos.z+= -y;
-        }
-        else {
-            universe->pos.x-= x;
-            universe->pos.y+= y;
-        }
-//    }
-    
+    if (zDown) {
+        universe->pos.z+= -y;
+    }
+    else {
+        universe->pos.x-= x;
+        universe->pos.y+= y;
+    }
     
 }
 
