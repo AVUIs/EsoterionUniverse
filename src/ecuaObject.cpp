@@ -43,25 +43,41 @@ void ecuaObject::update() {
     if (sender!=NULL) {
         float curSize = objSize + (objSize * objAmplitude * cos(ofGetElapsedTimef()*objOscillation));
         ofxOscMessage m;
-        m.setAddress("/object/id");
+        
+        m.setAddress("ecu");
         m.addIntArg(id);
-        sender->sendMessage(m);
-        m.clear();
-        m.setAddress("/object/warmth");
-        m.addFloatArg(ofMap(objWarmth, 0, 128, 0.0, 1.0, true));
-        sender->sendMessage(m);
-        m.clear();
-        m.setAddress("/object/size");
-        m.addFloatArg(ofMap(objSize, 10, 300, 0.0, 1.0, true));
-        sender->sendMessage(m);
-        m.clear();
-        m.setAddress("/object/sharpness");
-        m.addFloatArg(ofMap(objSharpness, 2, 42, 0.0, 0.1, true));
-        sender->sendMessage(m);
-        m.clear();
-        m.setAddress("/object/distance");
+        m.addFloatArg(objWarmth);
+        m.addFloatArg(objSize);
+        m.addFloatArg(objSharpness);
         m.addFloatArg(distToCenter);
+        m.addFloatArg(distToCam);
         sender->sendMessage(m);
+        
+//        m.setAddress("/object/id");
+//        m.addIntArg(id);
+//        sender->sendMessage(m);
+//        m.clear();
+//        m.setAddress("/object/warmth");
+//        m.addFloatArg(ofMap(objWarmth, 0, 128, 0.0, 1.0, true));
+//        sender->sendMessage(m);
+//        m.clear();
+//        m.setAddress("/object/size");
+//        m.addFloatArg(ofMap(objSize, 10, 300, 0.0, 1.0, true));
+//        sender->sendMessage(m);
+//        m.clear();
+//        m.setAddress("/object/sharpness");
+//        m.addFloatArg(ofMap(objSharpness, 2, 42, 0.0, 0.1, true));
+//        sender->sendMessage(m);
+//
+//        m.clear();
+//        m.setAddress("/object/distanceToCenter");
+//        m.addFloatArg(distToCenter);
+//        sender->sendMessage(m);
+//        
+//        m.clear();
+//        m.setAddress("/object/distanceToCam");
+//        m.addFloatArg(distToCam);
+//        sender->sendMessage(m);
     }
 }
 
