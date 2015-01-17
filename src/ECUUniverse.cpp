@@ -66,12 +66,7 @@ void ECUUniverse::draw() {
 
     cam.end();
 
-<<<<<<< HEAD
-   // ECUBaseObject* closestObject;
-    
-=======
     ofSetHexColor(0xffffff);
->>>>>>> d4e118505a908e9088f479f335d8ce46ac0012f0
     for (vector<ECUBaseObject*>::iterator it = objects.begin(); it != objects.end(); ++it) {
         
         ofVec3f screenPos = cam.worldToScreen((*it)->pos);
