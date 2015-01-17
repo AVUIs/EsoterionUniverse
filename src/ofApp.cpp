@@ -33,6 +33,7 @@ void ofApp::setup(){
 
 //    ofRegisterMouseEvents(control);
 
+    showHelp = false;
 }
 
 void ofApp::exit() {
@@ -48,7 +49,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofShowCursor();
-    ofBackgroundGradient(ofColor(64), ofColor(0));
+    ofBackgroundGradient(ofColor(255), ofColor(0));
 
     ofSetColor(255);
     
@@ -65,8 +66,13 @@ void ofApp::draw(){
         control.draw();
     }
     
+    if (universe->objects.size()==0 || showHelp) {
+        ofSetColor(255);
+        ofDrawBitmapString("KEY\n\nA = Add objects\nS = Save universe\nL = Load universe\nTwo-finger mouse drag = move arround\nZ + mouse drag = Hold to move in Z direction\nH = Show this help", ofGetWidth()/2 - 100, 30);
+    }
+    
     ofSetColor(255,0,0);
-    ofDrawBitmapString(universe->saved?"SAVED":"NOT SAVED!", 10, 10);
+    ofDrawBitmapString(universe->saved?"SAVED":"NOT SAVED", 10, 10);
 }
 
 bool zDown = false;
@@ -97,11 +103,11 @@ void ofApp::keyPressed(int key){
     
     KEY('a', createObject())
     
-    KEY('x', currentEditingObj = NULL)
-
     KEY('s', universe->save());
 
     KEY('l', universe->load());
+
+    KEY('h', showHelp =!showHelp);
 
     cout << "current pos = " << universe->pos << endl;
     cout << "there are " << universe->objects.size() << " objects" << endl;
@@ -124,16 +130,16 @@ ofQuaternion downOrientation;
 float mouseRange = 0;
 
 void ofApp::mouseDragged(int x, int y, int button) {
-
-    control.mouseDragged(x, y, button);
-    
-    for (int i = 0; i < control.amnt; i++) {
-        currentEditingObj->setParam(i, control.fadersPos[i]);
+    if (currentEditingObj!=NULL) {
+        control.mouseDragged(x, y, button);
         
-        //if we found an object, set the of the control to the object so there is no jump
-        
+        for (int i = 0; i < control.amnt; i++) {
+            currentEditingObj->setParam(i, control.fadersPos[i]);
+            universe->saved = false;
+            //if we found an object, set the of the control to the object so there is no jump
+            
+        }
     }
-
 }
 
 //--------------------------------------------------------------

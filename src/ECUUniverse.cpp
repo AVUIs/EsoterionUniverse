@@ -123,6 +123,7 @@ int ECUUniverse::addObject(ECUBaseObject *object) {
     object->universeRef = this;
     object->id = objects.size();
     objects.push_back(object);
+    saved = false;
 }
 
 
