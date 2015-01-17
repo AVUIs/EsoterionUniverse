@@ -35,7 +35,7 @@ public:
     
     void setParam(int _param, float _val);
     float getParam(int _param);
-    float getSaveParam(int _param);     //Borut: use this when saving parameters so it corresponds to mappings SetParam() which are a hack because of funky UI
+//    float getSaveParam(int _param);     //Borut: use this when saving parameters so it corresponds to mappings SetParam() which are a hack because of funky UI
 
 /*
     ofSpherePrimitive sphere;

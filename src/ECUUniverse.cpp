@@ -86,7 +86,7 @@ void ECUUniverse::saveUniverse(string path) {
         xml.setValue("OBJECT:X", (*it)->pos.x, tagNum);
         xml.setValue("OBJECT:Y", (*it)->pos.y, tagNum);
         xml.setValue("OBJECT:Z", (*it)->pos.z, tagNum);
-        for (int i =0; i<5;i++) {
+        for (int i =0; i<6;i++) {
             xml.setValue("OBJECT:PARAM" + ofToString(i), (*it)->getSaveParam(i), tagNum);
         }
     }
@@ -110,7 +110,7 @@ void ECUUniverse::loadUniverse(string path) {
         ECUBaseObject *obj = new ecuaObject(ofVec3f((double)xml.getValue("OBJECT:X", 0.0, i), (double)xml.getValue("OBJECT:Y", 0.0, i), (double)xml.getValue("OBJECT:Z", 0.0, i)));
         this->addObject(obj);
         obj->id = xml.getValue("OBJECT:ID", 0, i);
-        for (int j =0; j<5;j++) {
+        for (int j =0; j<6;j++) {
             obj->setParam(j, (double)xml.getValue("OBJECT:PARAM" + ofToString(j), 0.0, i));
         }
     }
