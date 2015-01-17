@@ -46,6 +46,7 @@ public:
     int     objSharpness;
     float   objOscillation;
     float   objAmplitude;
+    float   curSize;
     
 };
 

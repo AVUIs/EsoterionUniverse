@@ -39,15 +39,15 @@ void ecuaObject::setup(ofVec3f _p, int _id) {
 }
 
 void ecuaObject::update() {
-  
+    curSize = objSize + (objSize * objAmplitude * cos(ofGetElapsedTimef()*objOscillation));
+    
     if (sender!=NULL) {
-        float curSize = objSize + (objSize * objAmplitude * cos(ofGetElapsedTimef()*objOscillation));
         ofxOscMessage m;
         
         m.setAddress("ecu");
         m.addIntArg(id);
         m.addFloatArg(objWarmth);
-        m.addFloatArg(objSize);
+        m.addFloatArg(curSize);
         m.addFloatArg(objSharpness);
         m.addFloatArg(distToCenter);
         m.addFloatArg(distToCam);
@@ -92,7 +92,6 @@ void ecuaObject::draw() {
     ofFill();
     ofSetSphereResolution(objSharpness);
     ofSetColor(objColor);
-    float curSize = objSize + (objSize * objAmplitude * cos(ofGetElapsedTimef()*objOscillation));
     ofDrawSphere(pos, curSize);
 //    ofPopMatrix();
 }
@@ -125,10 +124,10 @@ void ecuaObject::setParam(int _param, float _val) {
         objSharpness = ofMap(_val, 0.0, 1.0, 2, 42, true);
         break;
         case 3:
-        objOscillation = ofMap(_val, 0.0, 1.0, 0.0, 100.0, true);
+        objOscillation = ofMap(_val, 0.0, 1.0, 0.0, 10.0, true);
         break;
         case 4:
-        objAmplitude = ofMap(_val, 0.0, 1.0, 0.0, 8.0, true);
+        objAmplitude = ofMap(_val, 0.0, 1.0, 0.0, 1.0, true);
         break;
         default:
         break;
@@ -146,9 +145,9 @@ float ecuaObject::getParam(int _param) {
         case 2:
         return ofMap(objSharpness, 2, 42, 0.0, 1.0, true);
         case 3:
-        return ofMap(objOscillation, 0.0, 100.0, 0.0, 1.0, true);
+        return ofMap(objOscillation, 0.0, 10.0, 0.0, 1.0, true);
         case 4:
-        return ofMap(objAmplitude, 0.0, 8.0, 0.0, 1.0, true);
+        return ofMap(objAmplitude, 0.0, 1.0, 0.0, 1.0, true);
         default:
         return 0;
     }
