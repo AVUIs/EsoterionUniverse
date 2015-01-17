@@ -125,7 +125,7 @@ void ecuaObject::setParam(int _param, float _val) {
         objSharpness = ofMap(_val, 0.0, 1.0, 2, 42, true);
         break;
         case 3:
-        objOscillation = ofMap(_val, 0.0, 1.0, 0, 100.0, true);
+        objOscillation = ofMap(_val, 0.0, 1.0, 0.0, 100.0, true);
         break;
         case 4:
         objAmplitude = ofMap(_val, 0.0, 1.0, 0.0, 8.0, true);
@@ -134,41 +134,8 @@ void ecuaObject::setParam(int _param, float _val) {
         break;
     }
 
-//    switch (_param) {
-//        case 0:
-//        objWarmth = ofMap(_val, 0.3, 1.0, 0, 128, true);
-//        break;
-//        case 1:
-//        objSize = ofMap(_val, 0.3, 1.0, 10, 300, true);
-//        break;
-//        case 2:
-//        objSharpness = ofMap(_val, 0.3, 1.0, 2, 42, true);
-//        break;
-//        case 3:
-//        objOscillation = ofMap(_val, 0.3, 1.0, 0, 100.0, true);
-//        break;
-//        default:
-//        break;
-//    }
 }
 
-//float ecuaObject::getSaveParam(int _param) {
-//    switch (_param) {
-//        case 0:
-//        return ofMap(objWarmth, 0, 128, 0, 1.0, true);
-//        case 1:
-//        return ofMap(objSize, 10, 300, 0, 1.0, true);
-//        case 2:
-//        return ofMap(objSharpness, 2, 42, 0, 1.0, true);
-//        case 3:
-//        return ofMap(objOscillation, 0, 100.0, 0, 1.0, true);
-//        case 4:
-//        return ofMap(objAmplitude, 0.0, 8.0, 0.0, 1.0, true);
-//
-//        default:
-//        return 0;
-//    }
-//}
 
 float ecuaObject::getParam(int _param) {
     switch (_param) {
@@ -181,7 +148,7 @@ float ecuaObject::getParam(int _param) {
         case 3:
         return ofMap(objOscillation, 0.0, 100.0, 0.0, 1.0, true);
         case 4:
-        return ofMap(objOscillation, 0.0, 8.0, 0.0, 1.0, true);
+        return ofMap(objAmplitude, 0.0, 8.0, 0.0, 1.0, true);
         default:
         return 0;
     }
