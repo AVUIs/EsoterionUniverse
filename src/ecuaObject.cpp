@@ -28,10 +28,10 @@ ecuaObject::~ecuaObject() {
 
 void ecuaObject::setup(ofVec3f _p, int _id) {
 
-    objWarmth = 100;
+    objWarmth = 180.0;
     objColor.setHsb(objWarmth, 255, 255);
-    objSize = 100;
-    objSharpness = 100;
+    objSize = 50.0;
+    objSharpness = 50.0;
     objOscillation = 1.0;
     objAmplitude = 0.02;
     pos = _p;
@@ -82,17 +82,30 @@ void ecuaObject::update() {
 }
 
 void ecuaObject::draw() {
-    float spinX = sin(ofGetElapsedTimef()*.35f);
-    float spinY = cos(ofGetElapsedTimef()*.075f);
-
+//    float spinX = sin(ofGetElapsedTimef()*.35f);
+//    float spinY = cos(ofGetElapsedTimef()*.075f);
 //    ofPushMatrix();
-  //  ofRotate(spinX, 1.0, 0.0, 0.0);
-   // ofRotate(spinY, 0.0, 1.0, 0.0);
-    objColor.setHsb(objWarmth, 255, 255);
+//    ofRotate(spinX, 1.0, 0.0, 0.0);
+//    ofRotate(spinY, 0.0, 1.0, 0.0);
+    objColor.setHsb(objWarmth, 255, 255,150);
     ofFill();
-    ofSetSphereResolution(objSharpness);
     ofSetColor(objColor);
-    ofDrawSphere(pos, curSize);
+    ofSpherePrimitive *ball = new ofSpherePrimitive();
+    ball->setRadius(curSize);
+    ball->setPosition(pos);
+    
+    //modify mesh with some noise
+    float liquidness = 5;
+    float amplitude = objSharpness;
+    float speedDampen = 5;
+    vector<ofVec3f>& verts = ball->getMesh().getVertices();
+    for(unsigned int i = 0; i < verts.size(); i++){
+        verts[i].x += ofSignedNoise(verts[i].x/liquidness, verts[i].y/liquidness,verts[i].z/liquidness, ofGetElapsedTimef()/speedDampen)*amplitude;
+        verts[i].y += ofSignedNoise(verts[i].z/liquidness, verts[i].x/liquidness,verts[i].y/liquidness, ofGetElapsedTimef()/speedDampen)*amplitude;
+        verts[i].z += ofSignedNoise(verts[i].y/liquidness, verts[i].z/liquidness,verts[i].x/liquidness, ofGetElapsedTimef()/speedDampen)*amplitude;
+    }
+    ball->draw();
+
 //    ofPopMatrix();
 }
 
@@ -115,13 +128,13 @@ void ecuaObject::setOscillation(float _oscillation) {
 void ecuaObject::setParam(int _param, float _val) {
     switch (_param) {
         case 0:
-        objWarmth = ofMap(_val, 0.0, 1.0, 0, 128, true);
+        objWarmth = ofMap(_val, 0.0, 1.0, 0, 360, true);
         break;
         case 1:
         objSize = ofMap(_val, 0.0, 1.0, 10, 300, true);
         break;
         case 2:
-        objSharpness = ofMap(_val, 0.0, 1.0, 2, 42, true);
+        objSharpness = ofMap(_val, 0.0, 1.0, 0.0, 100.0, true);
         break;
         case 3:
         objOscillation = ofMap(_val, 0.0, 1.0, 0.0, 10.0, true);
@@ -139,11 +152,11 @@ void ecuaObject::setParam(int _param, float _val) {
 float ecuaObject::getParam(int _param) {
     switch (_param) {
         case 0:
-        return ofMap(objWarmth, 0, 128, 0.0, 1.0, true);
+        return ofMap(objWarmth, 0, 360, 0.0, 1.0, true);
         case 1:
         return ofMap(objSize, 10, 300, 0.0, 1.0, true);
         case 2:
-        return ofMap(objSharpness, 2, 42, 0.0, 1.0, true);
+        return ofMap(objSharpness, 0.0, 100.0, 0.0, 1.0, true);
         case 3:
         return ofMap(objOscillation, 0.0, 10.0, 0.0, 1.0, true);
         case 4:
