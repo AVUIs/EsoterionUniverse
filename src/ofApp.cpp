@@ -58,9 +58,11 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    ofSetWindowTitle(ofToString(ofGetFrameRate()));
+    
     ofShowCursor();
     ofBackgroundGradient(ofColor(200), ofColor(0));
-
+    
     ofSetColor(255);
     
     ofEnableDepthTest();

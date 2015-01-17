@@ -31,7 +31,7 @@ void ecuaObject::setup(ofVec3f _p, int _id) {
     objWarmth = ofRandom(360.0);
     objColor.setHsb(objWarmth, 255, 255);
     objSize = ofRandom(300.0);
-    objSharpness = ofRandom(255);
+    objSharpness = ofRandom(128.0, 255.0);
     objOscillation = ofRandom(1.0);
     objAmplitude = ofRandom(1.0);
     pos = _p;
