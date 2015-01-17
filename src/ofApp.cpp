@@ -97,9 +97,13 @@ void ofApp::createObject() {
     }
 
     else {
+
         ECUBaseObject *obj = new ecuaObject(ofVec3f(universe->pos.x, universe->pos.y, universe->pos.z-1000));
         currentEditingObj = obj;
         universe->addObject(obj);
+        for (int i = 0; i < control.amnt; i++) {
+            control.fadersPos[i] = currentEditingObj->getParam(i);
+        }
     }
     
 //    creatingObject = !creatingObject;

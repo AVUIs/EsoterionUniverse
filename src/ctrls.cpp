@@ -156,6 +156,9 @@ void ctrls::mouseDragged(int x, int y, int button){
     mouseX = x-screenPos.x;
     mouseY = y-screenPos.y;
     
+//    float mouseDownX = mouseX - downX;
+//    float mouseDownY = mouseY - downY;
+    
     for(int i = 0; i < amnt;i++){
         if(touchedFader == i){
             
@@ -163,13 +166,13 @@ void ctrls::mouseDragged(int x, int y, int button){
             if(dragged && zeroDist > innerCircle){
   //              cout<<ofDist(mouseX,mouseY,xMin[i],yMin[i])+innerCircle<<endl;
                 
-                float val = ofMap(   ofDist(mouseX,mouseY,xMin[i],yMin[i])-innerCircle   , 0, len[i], 0, 1);
+                float val = ofMap(   ofDist(mouseX,mouseY,xMin[i],yMin[i])   , 0, len[i], -0.05, 1);
                 
                 val = ofClamp(val,0,1);
 //                cout<<len[i]<<"  "<<val<<endl;
                 
-                xPos[i] = (xMax[i]-xMin[i])*val+xMin[i];//(size-innerCircle)*scale * sin(i*spacer)*val;
-                yPos[i] = (yMax[i]-yMin[i])*val+yMin[i];//;(size-innerCircle)*scale * cos(i*spacer)*val;
+//                xPos[i] = (xMax[i]-xMin[i])*val+xMin[i];//(size-innerCircle)*scale * sin(i*spacer)*val;
+//                yPos[i] = (yMax[i]-yMin[i])*val+yMin[i];//;(size-innerCircle)*scale * cos(i*spacer)*val;
                 
                 fadersPos[i] = val;
                 cout<<fadersPos[i]<<endl;
