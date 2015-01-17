@@ -33,9 +33,32 @@ void ctrls::setup(){
 }
 
 //--------------------------------------------------------------
-void ctrls::update(){
-
-
+void ctrls::update(ofVec3f screenPosition){
+    screenPos = screenPosition;
+    
+//    for(int i = 0; i < amnt; i++){
+////        float val = ofMap(   ofDist(mouseX,mouseY,xMin[i],yMin[i])+innerCircle   , 0, len[i], 0, 1);
+////        ofMap(<#float value#>, <#float inputMin#>, <#float inputMax#>, <#float outputMin#>, <#float outputMax#>)
+//    
+////        val = ofMap (fadersPos[i], 0,1,0,len[i]);
+////        ofMap(fadersPos[i], xMin, ofDist(xMax[i],yMax[i],xMin[i],yMin[i])+innerCircle, 0, 1);
+//        
+//       // float val = ofMap( fadersPos[i], 0, ofDist(xMax[i],xMin[i],xMin[i],yMin[i]));
+//
+//        xPos[i] = fadersPos[i] * xMax[i]+xMin[i];
+//        yPos[i] = fadersPos[i] * yMax[i]+yMin[i];
+//    }
+    for(int i = 0; i < amnt; i++){
+    xPos[i] = (xMax[i]-xMin[i])*fadersPos[i]+xMin[i];//(size-innerCircle)*scale * sin(i*spacer)*val;
+    yPos[i] = (yMax[i]-yMin[i])*fadersPos[i]+yMin[i];//;(size-innerCircle)*scale * cos(i*spacer)*val;
+    }
+    
+}
+bool ctrls::getActive(){
+    return active;
+}
+void ctrls::setActive(bool activ){
+    active = activ;
 }
 
 //--------------------------------------------------------------
@@ -71,6 +94,41 @@ void ctrls::draw(){
         ofDrawLine(xPos[i],yPos[i],xPos[(i+1)%amnt],yPos[(i+1)%amnt]);
     }
     
+    ofPopMatrix();
+}
+void ctrls::drawP(){
+
+    ofPushMatrix();
+    ofTranslate(screenPos);
+    for (int i = 0; i < amnt; i ++){
+        ofSetColor(255,0,0);
+        
+        float mouseDist = ofDist(mouseX, mouseY, xPos[i], yPos[i]);
+        if(mouseDist < ballSize*2){
+            ofFill();
+            ofDrawEllipse(xPos[i],yPos[i],ballSize,ballSize);
+        }
+        
+        if(touchedFader == i){
+            ofSetColor(0,0,255,100);
+            ofDrawEllipse(xPos[i], yPos[i],ballSize*2, ballSize*2);
+            ofDrawLine(xMin[i],yMin[i],xMax[i], yMax[i]);
+        }
+        
+        else{
+            ofSetColor(255,0,0,30);
+            ofDrawLine(xMin[i],yMin[i],xMax[i], yMax[i]);
+        }
+        ofNoFill();
+        ofSetColor(255,100,100);
+        
+        ofDrawEllipse(xPos[i], yPos[i], ballSize,ballSize);
+        ofSetColor(255,220,0,200);
+        ofDrawEllipse(0,0,innerCircle*2,innerCircle*2);
+        
+        ofDrawLine(xPos[i],yPos[i],xPos[(i+1)%amnt],yPos[(i+1)%amnt]);
+    }
+    
     
     ofPopMatrix();
 }
@@ -88,15 +146,15 @@ void ctrls::keyReleased(int key){
 //--------------------------------------------------------------
 void ctrls::mouseMoved(int x, int y){
     
-    mouseX = x-(ofGetWidth()/2);
-    mouseY = y-(ofGetHeight()/2);
+    mouseX = x-screenPos.x;
+    mouseY = y-screenPos.y;
     
 }
 
 //--------------------------------------------------------------
 void ctrls::mouseDragged(int x, int y, int button){
-    mouseX = x-(ofGetWidth()/2);
-    mouseY = y-(ofGetHeight()/2);
+    mouseX = x-screenPos.x;
+    mouseY = y-screenPos.y;
     
     for(int i = 0; i < amnt;i++){
         if(touchedFader == i){
@@ -105,16 +163,16 @@ void ctrls::mouseDragged(int x, int y, int button){
             if(dragged && zeroDist > innerCircle){
   //              cout<<ofDist(mouseX,mouseY,xMin[i],yMin[i])+innerCircle<<endl;
                 
-                float val = ofMap(   ofDist(mouseX,mouseY,xMin[i],yMin[i])+innerCircle   , 0, len[i], 0, 1);
+                float val = ofMap(   ofDist(mouseX,mouseY,xMin[i],yMin[i])-innerCircle   , 0, len[i], 0, 1);
                 
                 val = ofClamp(val,0,1);
 //                cout<<len[i]<<"  "<<val<<endl;
                 
-                xPos[i] = val * xMax[i];
-                yPos[i] = val * yMax[i];
+                xPos[i] = (xMax[i]-xMin[i])*val+xMin[i];//(size-innerCircle)*scale * sin(i*spacer)*val;
+                yPos[i] = (yMax[i]-yMin[i])*val+yMin[i];//;(size-innerCircle)*scale * cos(i*spacer)*val;
                 
                 fadersPos[i] = val;
-                
+                cout<<fadersPos[i]<<endl;
             }
         }
     }
@@ -123,8 +181,8 @@ void ctrls::mouseDragged(int x, int y, int button){
 //--------------------------------------------------------------
 void ctrls::mousePressed(int x, int y, int button){
     dragged = true;
-    downX=x;
-    downY=y;
+    downX=mouseX;//x-screenPos.x;
+    downY=mouseY;//y-screenPos.y;
     
     for(int i = 0; i<amnt; i++){
         float mouseDist = ofDist(mouseX, mouseY, xPos[i], yPos[i]);
@@ -137,6 +195,11 @@ void ctrls::mousePressed(int x, int y, int button){
                 touchedFader = i;                }
         }
 
+    }
+    
+    if(ofDist(downX,downY,0,0) < innerCircle/2){
+        cout<<"active"<<endl;
+        active = 0;
     }
 
 }

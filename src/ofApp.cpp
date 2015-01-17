@@ -1,3 +1,5 @@
+
+
 #include "ofApp.h"
 
 //#include "ECURabbitObject.h"
@@ -42,7 +44,15 @@ void ofApp::exit() {
 //--------------------------------------------------------------
 void ofApp::update(){
     universe->update();
-    control.update();
+    if(control.getActive()==false){
+        currentEditingObj = NULL;
+    }
+    if(currentEditingObj != NULL ) {
+            control.update(universe->cam.worldToScreen((currentEditingObj)->pos));
+        for (int i = 0; i < control.amnt; i++) {
+//            cout<<control.fadersPos[i]<<endl;
+        }
+    }
 }
 
 //--------------------------------------------------------------
@@ -62,7 +72,7 @@ void ofApp::draw(){
     ofDisableDepthTest();
     
     if(currentEditingObj != NULL) {
-        control.draw();
+        control.drawP();
     }
 }
 
@@ -94,8 +104,7 @@ void ofApp::keyPressed(int key){
     
     KEY('a', createObject())
     
-    KEY('s', currentEditingObj = NULL)
-    
+    KEY('s', currentEditingObj = NULL);
     cout << "current pos = " << universe->pos << endl;
     cout << "there are " << universe->objects.size() << " objects" << endl;
 
@@ -145,7 +154,7 @@ void ofApp::mouseScrolled(float x, float y) {
 void ofApp::mousePressed(int x, int y, int button){
     mouseRange = mouseX;
     downPosition = universe->cam.getPosition(); // ofCamera::getGlobalPosition();
-    cout << "cam pos = " << downPosition << endl;
+   // cout << "cam pos = " << downPosition << endl;
     downOrientation = universe->cam.getOrientationQuat(); // ofCamera::getGlobalOrientation();
     
     control.mousePressed(x, y, button);
@@ -154,9 +163,14 @@ void ofApp::mousePressed(int x, int y, int button){
         currentEditingObj = universe->findEditObject(x, y);
         
         if (currentEditingObj != NULL) {
+            control.setActive(1);
             //if we found an object, set the of the control to the object so there is no jump
             for (int i = 0; i < control.amnt; i++) {
                 control.fadersPos[i] = currentEditingObj->getParam(i);
+//                cout<<"fadersPOS " <<control.fadersPos[i]<<endl;
+//                cout<<"editObj " <<currentEditingObj->getParam(i)<<endl;
+//                cout<<"fadersPOS " <<control.fadersPos[i]<<endl;
+
             }
         }
     }

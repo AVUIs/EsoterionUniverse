@@ -114,7 +114,7 @@ void ecuaObject::setOscillation(float _oscillation) {
 }
 
 void ecuaObject::setParam(int _param, float _val) {
-/*    switch (_param) {
+    switch (_param) {
         case 0:
         objWarmth = ofMap(_val, 0.0, 1.0, 0, 128, true);
         break;
@@ -130,23 +130,23 @@ void ecuaObject::setParam(int _param, float _val) {
         default:
         break;
     }
-*/
-    switch (_param) {
-        case 0:
-        objWarmth = ofMap(_val, 0.3, 1.0, 0, 128, true);
-        break;
-        case 1:
-        objSize = ofMap(_val, 0.3, 1.0, 10, 300, true);
-        break;
-        case 2:
-        objSharpness = ofMap(_val, 0.3, 1.0, 2, 42, true);
-        break;
-        case 3:
-        objOscillation = ofMap(_val, 0.3, 1.0, 0, 100.0, true);
-        break;
-        default:
-        break;
-    }
+
+//    switch (_param) {
+//        case 0:
+//        objWarmth = ofMap(_val, 0.3, 1.0, 0, 128, true);
+//        break;
+//        case 1:
+//        objSize = ofMap(_val, 0.3, 1.0, 10, 300, true);
+//        break;
+//        case 2:
+//        objSharpness = ofMap(_val, 0.3, 1.0, 2, 42, true);
+//        break;
+//        case 3:
+//        objOscillation = ofMap(_val, 0.3, 1.0, 0, 100.0, true);
+//        break;
+//        default:
+//        break;
+//    }
 }
 
 float ecuaObject::getParam(int _param) {

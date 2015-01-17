@@ -7,9 +7,12 @@ public:
     ctrls();
 
     void setup();
-    void update();
+    void update(ofVec3f screenPosition);
     void draw();
-    
+    void drawP();
+    bool getActive();
+    void setActive(bool activ);
+
     void keyPressed(int key);
     void keyReleased(int key);
     void mouseMoved(int x, int y);
@@ -19,7 +22,7 @@ public:
     void windowResized(int w, int h);
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
-    
+
     
     int amnt = 5;
     float size = 100;
@@ -29,7 +32,9 @@ public:
     float faderPos= 0.5;
     float innerCircle = 20;
     int touchedFader = -1;
+    ofVec3f screenPos;
     
+    bool active;
     vector<float> xMax;//i*spacer; //
     vector<float> yMax ;
     vector<float> xMin ; //xMax-20;//
