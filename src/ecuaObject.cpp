@@ -28,12 +28,12 @@ ecuaObject::~ecuaObject() {
 
 void ecuaObject::setup(ofVec3f _p, int _id) {
 
-    objWarmth = 100;
-    objColor.setHsb(objWarmth, 255, 255);
+    objWarmth = 64;
+    objColor.setHsb(objWarmth, 128, 128);
     objSize = 100;
-    objSharpness = 100;
-    objOscillation = 1.0;
-    objAmplitude = 0.02;
+    objSharpness = 21;
+    objOscillation = 5;
+    objAmplitude = 0.5;
     pos = _p;
     id = _id;
 }
