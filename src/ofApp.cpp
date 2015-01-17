@@ -12,7 +12,7 @@ void ofApp::setup(){
     
 //    cout << cam.getTarget().getPosition() << endl;
     universe = new ECUUniverse();
-    universe->addObject(new ecuaObject(ofVec3f(0, 0, -1000)));
+//Borut    universe->addObject(new ecuaObject(ofVec3f(0, 0, -1000)));
     //    cam.disableMouseInput();
     
     //    cam.set
@@ -64,6 +64,9 @@ void ofApp::draw(){
     if(currentEditingObj != NULL) {
         control.draw();
     }
+    
+    ofSetColor(255,0,0);
+    ofDrawBitmapString(universe->saved?"SAVED":"NOT SAVED!", 10, 10);
 }
 
 bool zDown = false;
@@ -94,8 +97,12 @@ void ofApp::keyPressed(int key){
     
     KEY('a', createObject())
     
-    KEY('s', currentEditingObj = NULL)
-    
+    KEY('x', currentEditingObj = NULL)
+
+    KEY('s', universe->save());
+
+    KEY('l', universe->load());
+
     cout << "current pos = " << universe->pos << endl;
     cout << "there are " << universe->objects.size() << " objects" << endl;
 
