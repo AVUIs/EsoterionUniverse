@@ -12,8 +12,11 @@
 #include "ofMain.h"
 #include "ECUBaseObject.h"
 
-#define HOST "localhost"
+
+#define HOST "192.168.0.2"
+//#define HOST "localhost"
 #define PORT 12345
+
 
 class ecuaObject : public ECUBaseObject {
     
@@ -43,6 +46,7 @@ public:
     int     objSharpness;
     float   objOscillation;
     float   objAmplitude;
+    
 };
 
 

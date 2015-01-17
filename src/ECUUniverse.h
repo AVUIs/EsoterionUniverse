@@ -17,7 +17,7 @@ public:
     ECUUniverse();
     ~ECUUniverse();
     
-    void update();      //KX send OSC
+    void update();      //KX sends OSC
     void draw();
     int addObject(ECUBaseObject *object);
     

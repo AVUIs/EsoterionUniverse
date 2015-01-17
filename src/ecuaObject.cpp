@@ -33,7 +33,7 @@ void ecuaObject::setup(ofVec3f _p, int _id) {
     objSize = 100;
     objSharpness = 100;
     objOscillation = 1.0;
-    objAmplitude = 0.01;
+    objAmplitude = 0.02;
     pos = _p;
     id = _id;
 }

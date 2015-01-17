@@ -52,6 +52,8 @@ void ECUUniverse::draw() {
 
     cam.end();
 
+   // ECUBaseObject* closestObject;
+    
     for (vector<ECUBaseObject*>::iterator it = objects.begin(); it != objects.end(); ++it) {
         
         ofVec3f screenPos = cam.worldToScreen((*it)->pos);

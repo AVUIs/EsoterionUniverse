@@ -47,6 +47,7 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    ofShowCursor();
     ofBackgroundGradient(ofColor(64), ofColor(0));
 
     ofSetColor(255);
@@ -168,7 +169,6 @@ void ofApp::mouseReleased(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-    
 }
 
 //--------------------------------------------------------------
