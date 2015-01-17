@@ -59,7 +59,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofShowCursor();
-    ofBackgroundGradient(ofColor(128), ofColor(0));
+    ofBackgroundGradient(ofColor(200), ofColor(0));
 
     ofSetColor(255);
     

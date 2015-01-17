@@ -40,12 +40,13 @@ public:
     ofSpherePrimitive sphere;
     ofMaterial material;
 */
-    float   objWarmth;
+    ofSpherePrimitive *ball;
+    float   objWarmth;  //mapped to color
     ofColor objColor;
     int     objSize;
-    int     objSharpness;
-    float   objOscillation;
-    float   objAmplitude;
+    int     objSharpness;   //mapped to transparency
+    float   objOscillation; //these two
+    float   objAmplitude;   //combined and mapped to oscillate spikiness
     float   curSize;
     
 };

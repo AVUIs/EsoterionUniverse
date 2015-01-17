@@ -28,18 +28,20 @@ ecuaObject::~ecuaObject() {
 
 void ecuaObject::setup(ofVec3f _p, int _id) {
 
-    objWarmth = 180.0;
+    objWarmth = ofRandom(360.0);
     objColor.setHsb(objWarmth, 255, 255);
-    objSize = 50.0;
-    objSharpness = 50.0;
-    objOscillation = 1.0;
-    objAmplitude = 0.02;
+    objSize = ofRandom(300.0);
+    objSharpness = ofRandom(255);
+    objOscillation = ofRandom(1.0);
+    objAmplitude = ofRandom(1.0);
     pos = _p;
     id = _id;
+    ball = new ofSpherePrimitive();
+
 }
 
 void ecuaObject::update() {
-    curSize = objSize + (objSize * objAmplitude * cos(ofGetElapsedTimef()*objOscillation));
+    curSize = objSize * objAmplitude * cos(ofGetElapsedTimef()*objOscillation);
     
     if (sender!=NULL) {
         ofxOscMessage m;
@@ -87,16 +89,15 @@ void ecuaObject::draw() {
 //    ofPushMatrix();
 //    ofRotate(spinX, 1.0, 0.0, 0.0);
 //    ofRotate(spinY, 0.0, 1.0, 0.0);
-    objColor.setHsb(objWarmth, 255, 255,150);
+    objColor.setHsb(objWarmth, 255, 255, objSharpness);
     ofFill();
     ofSetColor(objColor);
-    ofSpherePrimitive *ball = new ofSpherePrimitive();
-    ball->setRadius(curSize);
+    ball->setRadius(objSize);
     ball->setPosition(pos);
     
     //modify mesh with some noise
     float liquidness = 5;
-    float amplitude = objSharpness;
+    float amplitude = curSize/5.0;
     float speedDampen = 5;
     vector<ofVec3f>& verts = ball->getMesh().getVertices();
     for(unsigned int i = 0; i < verts.size(); i++){
@@ -134,7 +135,7 @@ void ecuaObject::setParam(int _param, float _val) {
         objSize = ofMap(_val, 0.0, 1.0, 10, 300, true);
         break;
         case 2:
-        objSharpness = ofMap(_val, 0.0, 1.0, 0.0, 100.0, true);
+        objSharpness = ofMap(_val, 0.0, 1.0, 0.0, 255.0, true);
         break;
         case 3:
         objOscillation = ofMap(_val, 0.0, 1.0, 0.0, 10.0, true);
@@ -156,7 +157,7 @@ float ecuaObject::getParam(int _param) {
         case 1:
         return ofMap(objSize, 10, 300, 0.0, 1.0, true);
         case 2:
-        return ofMap(objSharpness, 0.0, 100.0, 0.0, 1.0, true);
+        return ofMap(objSharpness, 0.0, 255.0, 0.0, 1.0, true);
         case 3:
         return ofMap(objOscillation, 0.0, 10.0, 0.0, 1.0, true);
         case 4:
