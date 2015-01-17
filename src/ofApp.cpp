@@ -94,7 +94,7 @@ void ofApp::keyPressed(int key){
     
     KEY('a', createObject())
     
-//    KEY('s', currentEditingObj = NULL)
+    KEY('s', currentEditingObj = NULL)
     
     cout << "current pos = " << universe->pos << endl;
     cout << "there are " << universe->objects.size() << " objects" << endl;
