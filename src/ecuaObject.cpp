@@ -149,20 +149,33 @@ void ecuaObject::setParam(int _param, float _val) {
 //    }
 }
 
+float ecuaObject::getSaveParam(int _param) {
+    switch (_param) {
+        case 0:
+        return ofMap(objWarmth, 0, 128, 0.3, 1.0, true);
+        case 1:
+        return ofMap(objSize, 10, 300, 0.3, 1.0, true);
+        case 2:
+        return ofMap(objSharpness, 2, 42, 0.3, 1.0, true);
+        case 3:
+        return ofMap(objOscillation, 0, 100.0, 0.3, 1.0, true);
+        default:
+        return 0;
+    }
+}
+
 float ecuaObject::getParam(int _param) {
     switch (_param) {
         case 0:
-            return ofMap(objWarmth, 0, 128, 0.0, 1.0, true);
+        return ofMap(objWarmth, 0, 128, 0.0, 1.0, true);
         case 1:
-            return ofMap(objSize, 10, 300, 0.0, 1.0, true);
+        return ofMap(objSize, 10, 300, 0.0, 1.0, true);
         case 2:
-            return ofMap(objSharpness, 2, 42, 0.0, 1.0, true);
+        return ofMap(objSharpness, 2, 42, 0.0, 1.0, true);
         case 3:
-            return ofMap(objOscillation, 0, 100.0, 0.0, 1.0, true);
+        return ofMap(objOscillation, 0, 100.0, 0.0, 1.0, true);
         default:
-            return 0;
+        return 0;
     }
-
 }
-
 

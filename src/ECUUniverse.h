@@ -11,16 +11,22 @@
 #include "ofMain.h"
 
 #include "ECUBaseObject.h"
+#include "ecuaObject.h"
+#include "ofxXmlSettings.h"
 
 class ECUUniverse {
 public:
     ECUUniverse();
     ~ECUUniverse();
+    void clearUniverse();
     
     void update();      //KX sends OSC
     void draw();
     int addObject(ECUBaseObject *object);
-    
+    void save();
+    void load();
+    void saveUniverse(string path);
+    void loadUniverse(string path);
     ECUBaseObject* findEditObject(float x, float y);
     
     
@@ -29,7 +35,8 @@ public:
     vector<ECUBaseObject*> objects;
     ofVec3f pos;
 
-    
+    ofxXmlSettings xml;
+    bool saved;
 };
 
 //    ofCamera *c = &universe->cam;
