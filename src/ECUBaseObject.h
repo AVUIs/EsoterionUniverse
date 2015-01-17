@@ -24,7 +24,6 @@ public:
     virtual void draw() {}
     virtual void setParam(int _param, float _val) {}
     virtual float getParam(int _param) {}
-    virtual float getSaveParam(int _param) {}
 //    virtual void sendOSc();
     
     

@@ -87,7 +87,7 @@ void ECUUniverse::saveUniverse(string path) {
         xml.setValue("OBJECT:Y", (*it)->pos.y, tagNum);
         xml.setValue("OBJECT:Z", (*it)->pos.z, tagNum);
         for (int i =0; i<5;i++) {
-            xml.setValue("OBJECT:PARAM" + ofToString(i), (*it)->getSaveParam(i), tagNum);
+            xml.setValue("OBJECT:PARAM" + ofToString(i), (*it)->getParam(i), tagNum);
         }
     }
     xml.saveFile(path);
