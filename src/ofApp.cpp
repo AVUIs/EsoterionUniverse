@@ -59,7 +59,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofShowCursor();
-    ofBackgroundGradient(ofColor(255), ofColor(0));
+    ofBackgroundGradient(ofColor(128), ofColor(0));
 
     ofSetColor(255);
     
@@ -108,11 +108,11 @@ void ofApp::createObject() {
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     
+    if (key=='s' || key =='l') currentEditingObj=NULL;
     
     KEY('z', zDown = true)
     
     KEY('a', createObject())
-    
 
     KEY('s', universe->save());
 
