@@ -40,6 +40,10 @@
 		EE264D3D1A34ACB700ADE8AC /* ofxOscMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE264D2A1A34A31E00ADE8AC /* ofxOscMessage.cpp */; };
 		EE264D3E1A34ACB700ADE8AC /* ofxOscParameterSync.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE264D2C1A34A31E00ADE8AC /* ofxOscParameterSync.cpp */; };
 		EE264D461A34B37200ADE8AC /* ctrls.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE264D441A34B37200ADE8AC /* ctrls.cpp */; };
+		EE29E8CF1A6D7D6B00A3FAD5 /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE29E8C81A6D7D4000A3FAD5 /* tinyxml.cpp */; };
+		EE29E8D01A6D7D6B00A3FAD5 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE29E8CA1A6D7D4000A3FAD5 /* tinyxmlerror.cpp */; };
+		EE29E8D11A6D7D6B00A3FAD5 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE29E8CB1A6D7D4000A3FAD5 /* tinyxmlparser.cpp */; };
+		EE29E8D21A6D7D6B00A3FAD5 /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE29E8CD1A6D7D4000A3FAD5 /* ofxXmlSettings.cpp */; };
 		EEF7DEFB1A33668B00B9DE2B /* ECUUniverse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EEF7DEF91A33668A00B9DE2B /* ECUUniverse.cpp */; };
 		EEF7DEFF1A33695100B9DE2B /* ECURabbitObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EEF7DEFE1A33695100B9DE2B /* ECURabbitObject.cpp */; };
 /* End PBXBuildFile section */
@@ -137,6 +141,12 @@
 		EE264D311A34A31E00ADE8AC /* ofxOscSender.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxOscSender.h; sourceTree = "<group>"; };
 		EE264D441A34B37200ADE8AC /* ctrls.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ctrls.cpp; sourceTree = "<group>"; };
 		EE264D451A34B37200ADE8AC /* ctrls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ctrls.h; sourceTree = "<group>"; };
+		EE29E8C81A6D7D4000A3FAD5 /* tinyxml.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
+		EE29E8C91A6D7D4000A3FAD5 /* tinyxml.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
+		EE29E8CA1A6D7D4000A3FAD5 /* tinyxmlerror.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
+		EE29E8CB1A6D7D4000A3FAD5 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
+		EE29E8CD1A6D7D4000A3FAD5 /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxXmlSettings.cpp; sourceTree = "<group>"; };
+		EE29E8CE1A6D7D4000A3FAD5 /* ofxXmlSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
 		EEF7DEF91A33668A00B9DE2B /* ECUUniverse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ECUUniverse.cpp; sourceTree = "<group>"; };
 		EEF7DEFA1A33668A00B9DE2B /* ECUUniverse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECUUniverse.h; sourceTree = "<group>"; };
 		EEF7DEFC1A3366ED00B9DE2B /* ECUBaseObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ECUBaseObject.h; sourceTree = "<group>"; };
@@ -174,6 +184,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				EE29E8C61A6D7D4000A3FAD5 /* ofxXmlSettings */,
 				EE264D061A34A31E00ADE8AC /* ofxOsc */,
 			);
 			name = addons;
@@ -373,6 +384,36 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		EE29E8C61A6D7D4000A3FAD5 /* ofxXmlSettings */ = {
+			isa = PBXGroup;
+			children = (
+				EE29E8C71A6D7D4000A3FAD5 /* libs */,
+				EE29E8CC1A6D7D4000A3FAD5 /* src */,
+			);
+			name = ofxXmlSettings;
+			path = ../../../addons/ofxXmlSettings;
+			sourceTree = "<group>";
+		};
+		EE29E8C71A6D7D4000A3FAD5 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				EE29E8C81A6D7D4000A3FAD5 /* tinyxml.cpp */,
+				EE29E8C91A6D7D4000A3FAD5 /* tinyxml.h */,
+				EE29E8CA1A6D7D4000A3FAD5 /* tinyxmlerror.cpp */,
+				EE29E8CB1A6D7D4000A3FAD5 /* tinyxmlparser.cpp */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		EE29E8CC1A6D7D4000A3FAD5 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				EE29E8CD1A6D7D4000A3FAD5 /* ofxXmlSettings.cpp */,
+				EE29E8CE1A6D7D4000A3FAD5 /* ofxXmlSettings.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -460,6 +501,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE29E8CF1A6D7D6B00A3FAD5 /* tinyxml.cpp in Sources */,
+				EE29E8D01A6D7D6B00A3FAD5 /* tinyxmlerror.cpp in Sources */,
+				EE29E8D11A6D7D6B00A3FAD5 /* tinyxmlparser.cpp in Sources */,
+				EE29E8D21A6D7D6B00A3FAD5 /* ofxXmlSettings.cpp in Sources */,
 				EE264D461A34B37200ADE8AC /* ctrls.cpp in Sources */,
 				EE264D3D1A34ACB700ADE8AC /* ofxOscMessage.cpp in Sources */,
 				EE264D3E1A34ACB700ADE8AC /* ofxOscParameterSync.cpp in Sources */,
