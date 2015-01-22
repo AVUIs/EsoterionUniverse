@@ -13,8 +13,8 @@
 #include "ECUBaseObject.h"
 
 
-#define HOST "192.168.0.2"
-//#define HOST "localhost"
+//#define HOST "192.168.0.2"
+#define HOST "localhost"
 #define PORT 12345
 
 
@@ -41,6 +41,9 @@ public:
     ofMaterial material;
 */
     ofSpherePrimitive *ball;
+    ofMaterial  material;
+    //ofLight     light;
+    
     float   objWarmth;  //mapped to color
     ofColor objColor;
     int     objSize;

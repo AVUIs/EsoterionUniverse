@@ -22,7 +22,20 @@ void ctrls::setup(){
         
         len.push_back(ofDist(xMin[i],yMin[i],xMax[i],yMax[i]));
     }
-
+    //double the amount to use with secondary layer
+    for(int i= 0; i< amnt; i++){
+        fadersPos.push_back(1);
+        isTouched.push_back(false);
+        xMax.push_back( size*scale * sin(i*spacer));//i*spacer; //
+        yMax.push_back( size*scale * cos(i*spacer));
+        xMin.push_back( innerCircle * sin(i*spacer)); //xMax-20;//
+        yMin.push_back( innerCircle * cos(i*spacer));
+        
+        xPos.push_back( xMax[i] * 1.f);
+        yPos.push_back( yMax[i] * 1.f);
+        
+        len.push_back(ofDist(xMin[i],yMin[i],xMax[i],yMax[i]));
+    }
 
 //    ofAddListener(ofEvents().update, this, &ctrls::update);
 //    ofAddListener(ofEvents().mouseDragged , this, &ctrls::mouseDragged);
@@ -48,7 +61,7 @@ void ctrls::update(ofVec3f screenPosition){
 //        xPos[i] = fadersPos[i] * xMax[i]+xMin[i];
 //        yPos[i] = fadersPos[i] * yMax[i]+yMin[i];
 //    }
-    for(int i = 0; i < amnt; i++){
+    for(int i = (useSecondary?amnt:0); i < amnt+(useSecondary?amnt:0); i++){
     xPos[i] = (xMax[i]-xMin[i])*fadersPos[i]+xMin[i];//(size-innerCircle)*scale * sin(i*spacer)*val;
     yPos[i] = (yMax[i]-yMin[i])*fadersPos[i]+yMin[i];//;(size-innerCircle)*scale * cos(i*spacer)*val;
     }
@@ -96,12 +109,15 @@ void ctrls::draw(){
     
     ofPopMatrix();
 }
-void ctrls::drawP(){
 
+void ctrls::drawP(){
+    
     ofPushMatrix();
     ofTranslate(screenPos);
-    for (int i = 0; i < amnt; i ++){
-        ofSetColor(255,0,0);
+    ofSetColor(0,0,0);
+    if (useSecondary) ofSetColor(255,255,255);
+    for (int i = (useSecondary?amnt:0); i < amnt+(useSecondary?amnt:0); i ++){
+        //ofSetColor(255,0,0);
         
         float mouseDist = ofDist(mouseX, mouseY, xPos[i], yPos[i]);
         if(mouseDist < ballSize*2){
@@ -110,25 +126,28 @@ void ctrls::drawP(){
         }
         
         if(touchedFader == i){
-            ofSetColor(0,0,255,100);
+            ofSetColor(0,0,0,200);
+            if (useSecondary) ofSetColor(255,255,255,200);
             ofDrawEllipse(xPos[i], yPos[i],ballSize*2, ballSize*2);
+            ofDrawBitmapString(ofToString(fadersPos[touchedFader],2), -17, 5);
             ofDrawLine(xMin[i],yMin[i],xMax[i], yMax[i]);
         }
         
         else{
-            ofSetColor(255,0,0,30);
+            ofSetColor(0,0,0,100);
+            if (useSecondary) ofSetColor(255,255,255,100);
             ofDrawLine(xMin[i],yMin[i],xMax[i], yMax[i]);
         }
         ofNoFill();
-        ofSetColor(255,100,100);
+        //ofSetColor(255,100,100);
         
         ofDrawEllipse(xPos[i], yPos[i], ballSize,ballSize);
-        ofSetColor(255,220,0,200);
+        ofSetColor(0,0,0,200);
+        if (useSecondary) ofSetColor(255,255,255,200);
         ofDrawEllipse(0,0,innerCircle*2,innerCircle*2);
         
-        ofDrawLine(xPos[i],yPos[i],xPos[(i+1)%amnt],yPos[(i+1)%amnt]);
+        ofDrawLine(xPos[i],yPos[i],xPos[(i+1)%amnt+(useSecondary?amnt:0)],yPos[(i+1)%amnt+(useSecondary?amnt:0)]);
     }
-    
     
     ofPopMatrix();
 }
@@ -159,7 +178,7 @@ void ctrls::mouseDragged(int x, int y, int button){
 //    float mouseDownX = mouseX - downX;
 //    float mouseDownY = mouseY - downY;
     
-    for(int i = 0; i < amnt;i++){
+    for(int i = (useSecondary?amnt:0); i < amnt+(useSecondary?amnt:0);i++){
         if(touchedFader == i){
             
             float zeroDist = ofDist(mouseX,mouseY,0,0);
@@ -175,7 +194,7 @@ void ctrls::mouseDragged(int x, int y, int button){
 //                yPos[i] = (yMax[i]-yMin[i])*val+yMin[i];//;(size-innerCircle)*scale * cos(i*spacer)*val;
                 
                 fadersPos[i] = val;
-                cout<<fadersPos[i]<<endl;
+                cout << "FADER: " << i << " VAL: " << val << endl;
             }
         }
     }
@@ -188,14 +207,16 @@ void ctrls::mousePressed(int x, int y, int button){
     downY=mouseY;//y-screenPos.y;
     
     for(int i = 0; i<amnt; i++){
-        float mouseDist = ofDist(mouseX, mouseY, xPos[i], yPos[i]);
+        float mouseDist = ofDist(mouseX, mouseY, xPos[i+(useSecondary?amnt:0)], yPos[i+(useSecondary?amnt:0)]);
 
         if( mouseDist < ballSize*2){
             
             float zeroDist = ofDist(mouseX,mouseY,0,0);
             
             if(dragged && zeroDist > innerCircle){
-                touchedFader = i;                }
+                touchedFader = i+(useSecondary?amnt:0);
+                cout << "TOUCHED FADER: " << touchedFader << endl;
+            }
         }
 
     }

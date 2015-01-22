@@ -14,6 +14,8 @@ ECUUniverse::ECUUniverse() {
     cout << "made cam" << endl;
 //    cam.enableMouseInput();
     saved = false;
+    
+    debug = false;
 }
 
 
@@ -58,15 +60,15 @@ void ECUUniverse::draw() {
 
     cam.end();
 
-    ofSetHexColor(0xffffff);
-    for (vector<ECUBaseObject*>::iterator it = objects.begin(); it != objects.end(); ++it) {
-        
-        ofVec3f screenPos = cam.worldToScreen((*it)->pos);
-        ofDrawBitmapString("dtc = " + ofToString(((*it)->distToCam)) + ", " + ofToString((*it)->distToCenter),  screenPos.x, screenPos.y);
-        
-//        ofDrawCircle(a.x, a.y, 20);
-        
+    if (debug) {
+        ofSetHexColor(0xffffff);
+        for (vector<ECUBaseObject*>::iterator it = objects.begin(); it != objects.end(); ++it) {
+            
+            ofVec3f screenPos = cam.worldToScreen((*it)->pos);
+            ofDrawBitmapString("dtc = " + ofToString(((*it)->distToCam)) + ", " + ofToString((*it)->distToCenter),  screenPos.x, screenPos.y);
+        }
     }
+    ofDrawBitmapString("NUM OBJECTS: " + ofToString(objects.size()),ofGetWidth()/2-50,ofGetHeight());
 }
 
 void ECUUniverse::save() {

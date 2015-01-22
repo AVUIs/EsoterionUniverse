@@ -61,7 +61,8 @@ void ofApp::draw(){
     ofSetWindowTitle(ofToString(ofGetFrameRate()));
     
     ofShowCursor();
-    ofBackgroundGradient(ofColor(200), ofColor(0));
+//    ofBackgroundGradient(ofColor(200), ofColor(0));
+    ofBackground(0, 0, 0);
     
     ofSetColor(255);
     
@@ -126,6 +127,9 @@ void ofApp::keyPressed(int key){
 
     KEY('h', showHelp =!showHelp);
 
+    KEY('d', universe->debug = !universe->debug);
+    
+    KEY(OF_KEY_COMMAND, control.useSecondary=true);
     cout << "current pos = " << universe->pos << endl;
     cout << "there are " << universe->objects.size() << " objects" << endl;
 
@@ -134,6 +138,7 @@ void ofApp::keyPressed(int key){
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
     zDown = false;
+    control.useSecondary=false;
 }
 
 //--------------------------------------------------------------

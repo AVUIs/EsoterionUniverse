@@ -37,6 +37,8 @@ public:
 
     ofxXmlSettings xml;
     bool saved;
+    
+    bool debug;
 };
 
 //    ofCamera *c = &universe->cam;

@@ -50,5 +50,7 @@ public:
     int downY=0;
     
     bool dragged = false;
+    
+    bool useSecondary = false;
 };
 
