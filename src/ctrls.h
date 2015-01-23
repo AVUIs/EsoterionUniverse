@@ -12,7 +12,8 @@ public:
     void drawP();
     bool getActive();
     void setActive(bool activ);
-
+    bool deleteObject(int x, int y, int button);
+    
     void keyPressed(int key);
     void keyReleased(int key);
     void mouseMoved(int x, int y);
@@ -50,5 +51,8 @@ public:
     int downY=0;
     
     bool dragged = false;
+    
+    bool useSecondary = false;
+    bool useTertiary = false;
 };
 

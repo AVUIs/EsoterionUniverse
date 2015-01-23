@@ -1,17 +1,24 @@
 
 
 #include "ofApp.h"
+
+//#include "ECURabbitObject.h"
 #include "ecuaObject.h"
 
 ofVec3f p;
 
-ofShader shader;
-
 //--------------------------------------------------------------
 void ofApp::setup(){
-//    ofSetVerticalSync(true);
-    ofSetFrameRate(25);
+    ofSetVerticalSync(true);
+//    ofSetEscapeQuitsApp(false);
+//    mesh.load("lofi-bunny.ply");
+    
+//    cout << cam.getTarget().getPosition() << endl;
     universe = new ECUUniverse();
+//Borut    universe->addObject(new ecuaObject(ofVec3f(0, 0, -1000)));
+    //    cam.disableMouseInput();
+    
+    //    cam.set
     
     ofSetSmoothLighting(true);
     pointLight2.setDiffuseColor( ofFloatColor(.3, .3, .3));
@@ -21,11 +28,15 @@ void ofApp::setup(){
 
     currentEditingObj = NULL;
     
+//    ofAddListener(ofEvent::mousePressed, &control, control::mousePressed)
+//    ofAddListener(ofEvents().mouseDragged , &control, &ctrls::mouseDragged);
+//    ofAddListener(ofEvents().mousePressed, &control, &ctrls::mousePressed);
+//    ofAddListener(ofEvents().mouseReleased, &control, &ctrls::mouseReleased);
+//    ofAddListener(ofEvents().mouseScrolled, &control, &ctrls::mouseScrolled);
+
+//    ofRegisterMouseEvents(control);
+
     showHelp = false;
-    
-    shader.load("main");
-    
-    universe->loadUniverse("/Users/whg/Desktop/universe-2015-01-20-00-05-08-005.xml");
 }
 
 void ofApp::exit() {
@@ -41,6 +52,7 @@ void ofApp::update(){
     if(currentEditingObj != NULL ) {
             control.update(universe->cam.worldToScreen((currentEditingObj)->pos));
         for (int i = 0; i < control.amnt; i++) {
+//            cout<<control.fadersPos[i]<<endl;
         }
     }
 }
@@ -50,29 +62,27 @@ void ofApp::draw(){
     ofSetWindowTitle(ofToString(ofGetFrameRate()));
     
     ofShowCursor();
-    ofBackgroundGradient(ofColor(200), ofColor(0));
+    ofBackgroundGradient(ofColor(50), ofColor(0));
+    //ofBackground(0, 0, 0);
     
     ofSetColor(255);
     
-    shader.begin();
-//    ofEnableDepthTest();
-//    ofEnableLighting();
-//    pointLight2.enable();
+    ofEnableDepthTest();
+    ofEnableLighting();
+    pointLight2.enable();
     
-
     universe->draw();
-
     
-//    ofDisableLighting();
-//    ofDisableDepthTest();
-    shader.end();
+    ofDisableLighting();
+    ofDisableDepthTest();
+    
     if(currentEditingObj != NULL) {
         control.drawP();
     }
     
     if (universe->objects.size()==0 || showHelp) {
         ofSetColor(255);
-        ofDrawBitmapString("KEY\n\nA = Add objects\nS = Save universe\nL = Load universe\nTwo-finger mouse drag = move arround\nZ + mouse drag = Hold to move in Z direction\nH = Show this help", ofGetWidth()/2 - 100, 30);
+        ofDrawBitmapString("KEY\n\nA = Add objects\nS = Save universe\nL = Load universe\nTwo-finger mouse drag = move arround\nZ + mouse drag = Hold to move in Z direction\nClick on object = Show GUI\nCmd-Click = Secondary GUI\nAlt-Click = Tertiary GUI\nH = Show this help", ofGetWidth()/2 - 100, 30);
     }
     
     ofSetColor(255,0,0);
@@ -81,7 +91,6 @@ void ofApp::draw(){
 
 bool zDown = false;
 
-#define KEY(k, f) if(key == (k)) { (f); }
 
 void ofApp::createObject() {
     
@@ -103,6 +112,8 @@ void ofApp::createObject() {
 //    creatingObject = !creatingObject;
 }
 
+#define KEY(k, f) if(key == (k)) { (f); }
+
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     
@@ -118,14 +129,20 @@ void ofApp::keyPressed(int key){
 
     KEY('h', showHelp =!showHelp);
 
-    cout << "current pos = " << universe->pos << endl;
-    cout << "there are " << universe->objects.size() << " objects" << endl;
+    KEY('d', universe->debug = !universe->debug);
+    
+    KEY(OF_KEY_COMMAND, control.useSecondary=true);
+    KEY(OF_KEY_ALT, control.useTertiary=true);
+    //cout << "current pos = " << universe->pos << endl;
+    //cout << "there are " << universe->objects.size() << " objects" << endl;
 
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-    zDown = false;
+    KEY('z', zDown = false);
+    KEY(OF_KEY_COMMAND, control.useSecondary=false);
+    KEY(OF_KEY_ALT, control.useTertiary=false);
 }
 
 //--------------------------------------------------------------
@@ -149,34 +166,6 @@ void ofApp::mouseDragged(int x, int y, int button) {
             
         }
     }
-    
-    ofCamera *c = &universe->cam;
-//    ofVec3f t = ofVec3f(universe->pos.x, universe->pos.y, universe->pos.z+mouseY*10);
-    ofVec3f t = ofVec3f(0, 0, mouseY*10);
-    ofDrawCircle(t.x, t.y, t.z);
-    
-    ofVec3f la = ofVec3f(downPosition);
-    la.z-= 200;
-    
-    int deg = ofGetFrameNum() % 360;
-    float m = 200;
-    float xr = cos(DEG_TO_RAD*deg)*m;
-    float yr = sin(DEG_TO_RAD*deg)*m;
-    universe->pos.x = la.x + xr;
-    universe->pos.z = la.z + yr;
-    universe->la = ofVec3f(la);
-//    universe->cam.setPosition(<#float px#>, <#float py#>, <#float pz#>)
-//    universe->cam.rotateAround(mouseX-mouseRange, ofVec3f(0, 1, 0), ofVec3f(universe->pos.x, universe->pos.y, universe->pos.z-1000));
-//    ofQuaternion curRot = ofQuaternion(0, c->getXAxis(), mouseX-mouseRange, c->getYAxis(), 0, c->getZAxis());
-//    setPosition((prevPosition-target.getGlobalPosition())*curRot +target.getGlobalPosition());
-
-
-//    c->setPosition(t);
-   
-//    c->lookAt(downPosition);
-//    universe->cam.lookAt(la);
-//    c->setOrientation(downOrientation * curRot);
-//    c->setPosition((downPosition-t)*curRot +t);
 }
 
 //--------------------------------------------------------------
@@ -194,25 +183,23 @@ void ofApp::mouseScrolled(float x, float y) {
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
     mouseRange = mouseX;
-    
-    downPosition = ofVec3f(universe->pos); //universe->cam.getPosition(); // ofCamera::getGlobalPosition();
+    downPosition = universe->cam.getPosition(); // ofCamera::getGlobalPosition();
    // cout << "cam pos = " << downPosition << endl;
     downOrientation = universe->cam.getOrientationQuat(); // ofCamera::getGlobalOrientation();
     
-    control.mousePressed(x, y, button);
-    
-    if(currentEditingObj == NULL) {
-        currentEditingObj = universe->findEditObject(x, y);
-        
-        if (currentEditingObj != NULL) {
-            control.setActive(1);
-            //if we found an object, set the of the control to the object so there is no jump
-            for (int i = 0; i < control.amnt; i++) {
-                control.fadersPos[i] = currentEditingObj->getParam(i);
-//                cout<<"fadersPOS " <<control.fadersPos[i]<<endl;
-//                cout<<"editObj " <<currentEditingObj->getParam(i)<<endl;
-//                cout<<"fadersPOS " <<control.fadersPos[i]<<endl;
-
+    if(currentEditingObj != NULL && control.deleteObject(x, y, button)) {
+        universe->deleteObject(currentEditingObj);
+        currentEditingObj == NULL;
+    } else {
+        control.mousePressed(x, y, button);
+        if(currentEditingObj == NULL) {
+            currentEditingObj = universe->findEditObject(x, y);
+            if (currentEditingObj != NULL) {
+                control.setActive(1);
+                //if we found an object, set the of the control to the object so there is no jump
+                for (int i = 0; i < control.amnt; i++) {
+                    control.fadersPos[i] = currentEditingObj->getParam(i);
+                }
             }
         }
     }
