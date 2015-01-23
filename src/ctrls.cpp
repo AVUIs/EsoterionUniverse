@@ -76,6 +76,7 @@ void ctrls::setActive(bool activ){
 
 //--------------------------------------------------------------
 void ctrls::draw(){
+/*do we need this at all?
     ofPushMatrix();
     ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
     for (int i = 0; i < amnt; i ++){
@@ -108,6 +109,7 @@ void ctrls::draw(){
     }
     
     ofPopMatrix();
+*/
 }
 
 void ctrls::drawP(){
@@ -115,40 +117,52 @@ void ctrls::drawP(){
     ofPushMatrix();
     ofTranslate(screenPos);
     ofSetColor(0,0,0);
-    if (useSecondary) ofSetColor(255,255,255);
-    for (int i = (useSecondary?amnt:0); i < amnt+(useSecondary?amnt:0); i ++){
-        //ofSetColor(255,0,0);
-        
-        float mouseDist = ofDist(mouseX, mouseY, xPos[i], yPos[i]);
-        if(mouseDist < ballSize*2){
-            ofFill();
-            ofDrawEllipse(xPos[i],yPos[i],ballSize,ballSize);
-        }
-        
-        if(touchedFader == i){
-            ofSetColor(0,0,0,200);
-            if (useSecondary) ofSetColor(255,255,255,200);
-            ofDrawEllipse(xPos[i], yPos[i],ballSize*2, ballSize*2);
-            ofDrawBitmapString(ofToString(fadersPos[touchedFader],2), -17, 5);
-            ofDrawLine(xMin[i],yMin[i],xMax[i], yMax[i]);
-        }
-        
-        else{
-            ofSetColor(0,0,0,100);
-            if (useSecondary) ofSetColor(255,255,255,100);
-            ofDrawLine(xMin[i],yMin[i],xMax[i], yMax[i]);
-        }
+    if (useTertiary) {
         ofNoFill();
-        //ofSetColor(255,100,100);
+        ofSetLineWidth(2);
+        ofSetColor(0, 0, 0);
+        ofDrawEllipse(0,0,innerCircle*2,innerCircle*2);
+        ofDrawLine(-innerCircle/2, -innerCircle/2, innerCircle/2, innerCircle/2);
+        ofDrawLine(innerCircle/2, -innerCircle/2, -innerCircle/2, innerCircle/2);
         
-        ofDrawEllipse(xPos[i], yPos[i], ballSize,ballSize);
+        
+    } else {
+        ofSetLineWidth(2);
+        ofNoFill();
         ofSetColor(0,0,0,200);
         if (useSecondary) ofSetColor(255,255,255,200);
         ofDrawEllipse(0,0,innerCircle*2,innerCircle*2);
-        
-        ofDrawLine(xPos[i],yPos[i],xPos[(i+1)%amnt+(useSecondary?amnt:0)],yPos[(i+1)%amnt+(useSecondary?amnt:0)]);
+
+        if (useSecondary) ofSetColor(255,255,255);
+        for (int i = (useSecondary?amnt:0); i < amnt+(useSecondary?amnt:0); i ++){
+            //ofSetColor(255,0,0);
+            
+            float mouseDist = ofDist(mouseX, mouseY, xPos[i], yPos[i]);
+            if(mouseDist < ballSize*2){
+                ofFill();
+                ofDrawEllipse(xPos[i],yPos[i],ballSize,ballSize);
+            }
+            
+            if(touchedFader == i){
+                ofSetColor(0,0,0,200);
+                if (useSecondary) ofSetColor(255,255,255,200);
+                ofDrawEllipse(xPos[i], yPos[i],ballSize*2, ballSize*2);
+                ofDrawBitmapString(ofToString(fadersPos[touchedFader],2), -17, 5);
+                ofDrawLine(xMin[i],yMin[i],xMax[i], yMax[i]);
+            }
+            
+            else{
+                ofSetColor(0,0,0,100);
+                if (useSecondary) ofSetColor(255,255,255,100);
+                ofDrawLine(xMin[i],yMin[i],xMax[i], yMax[i]);
+            }
+            ofNoFill();
+            //ofSetColor(255,100,100);
+            
+            ofDrawEllipse(xPos[i], yPos[i], ballSize,ballSize);
+            ofDrawLine(xPos[i],yPos[i],xPos[(i+1)%amnt+(useSecondary?amnt:0)],yPos[(i+1)%amnt+(useSecondary?amnt:0)]);
+        }
     }
-    
     ofPopMatrix();
 }
 
@@ -194,7 +208,6 @@ void ctrls::mouseDragged(int x, int y, int button){
 //                yPos[i] = (yMax[i]-yMin[i])*val+yMin[i];//;(size-innerCircle)*scale * cos(i*spacer)*val;
                 
                 fadersPos[i] = val;
-                cout << "FADER: " << i << " VAL: " << val << endl;
             }
         }
     }
@@ -215,17 +228,25 @@ void ctrls::mousePressed(int x, int y, int button){
             
             if(dragged && zeroDist > innerCircle){
                 touchedFader = i+(useSecondary?amnt:0);
-                cout << "TOUCHED FADER: " << touchedFader << endl;
+                //cout << "TOUCHED FADER: " << touchedFader << endl;
             }
         }
 
     }
     
-    if(ofDist(downX,downY,0,0) < innerCircle/2){
-        cout<<"active"<<endl;
+    if(ofDist(downX,downY,0,0) < innerCircle){
         active = 0;
     }
+}
 
+bool ctrls::deleteObject(int x, int y, int button) {
+    downX=mouseX;
+    downY=mouseY;
+    if(useTertiary && ofDist(downX,downY,0,0) < innerCircle) {
+        active = 0;
+        return true;
+    }
+    return false;
 }
 
 //--------------------------------------------------------------

@@ -28,7 +28,7 @@ public:
     void saveUniverse(string path);
     void loadUniverse(string path);
     ECUBaseObject* findEditObject(float x, float y);
-    
+    void deleteObject(ECUBaseObject* objectToDelete);
     
     ofCamera cam;
 //    map<int, ECUBaseObject*> objects;

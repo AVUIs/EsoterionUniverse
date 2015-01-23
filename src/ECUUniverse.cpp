@@ -68,6 +68,7 @@ void ECUUniverse::draw() {
             ofDrawBitmapString("dtc = " + ofToString(((*it)->distToCam)) + ", " + ofToString((*it)->distToCenter),  screenPos.x, screenPos.y);
         }
     }
+    ofSetColor(128);
     ofDrawBitmapString("NUM OBJECTS: " + ofToString(objects.size()),ofGetWidth()/2-50,ofGetHeight());
 }
 
@@ -144,6 +145,16 @@ ECUBaseObject* ECUUniverse::findEditObject(float x, float y) {
         }
     }
     return NULL;
+}
+
+void ECUUniverse::deleteObject(ECUBaseObject* objectToDelete) {
+    int i=0;
+    for (vector<ECUBaseObject*>::iterator it = objects.begin(); it != objects.end(); ++it) {
+        if ((*it)->id==objectToDelete->id) {
+            objects.erase(it);
+            break;
+        }
+    }
 }
 
 void ECUUniverse::clearUniverse() {

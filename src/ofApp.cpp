@@ -10,6 +10,7 @@ ofVec3f p;
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofSetVerticalSync(true);
+//    ofSetEscapeQuitsApp(false);
 //    mesh.load("lofi-bunny.ply");
     
 //    cout << cam.getTarget().getPosition() << endl;
@@ -61,8 +62,8 @@ void ofApp::draw(){
     ofSetWindowTitle(ofToString(ofGetFrameRate()));
     
     ofShowCursor();
-//    ofBackgroundGradient(ofColor(200), ofColor(0));
-    ofBackground(0, 0, 0);
+    ofBackgroundGradient(ofColor(50), ofColor(0));
+    //ofBackground(0, 0, 0);
     
     ofSetColor(255);
     
@@ -81,7 +82,7 @@ void ofApp::draw(){
     
     if (universe->objects.size()==0 || showHelp) {
         ofSetColor(255);
-        ofDrawBitmapString("KEY\n\nA = Add objects\nS = Save universe\nL = Load universe\nTwo-finger mouse drag = move arround\nZ + mouse drag = Hold to move in Z direction\nH = Show this help", ofGetWidth()/2 - 100, 30);
+        ofDrawBitmapString("KEY\n\nA = Add objects\nS = Save universe\nL = Load universe\nTwo-finger mouse drag = move arround\nZ + mouse drag = Hold to move in Z direction\nClick on object = Show GUI\nCmd-Click = Secondary GUI\nAlt-Click = Tertiary GUI\nH = Show this help", ofGetWidth()/2 - 100, 30);
     }
     
     ofSetColor(255,0,0);
@@ -90,7 +91,6 @@ void ofApp::draw(){
 
 bool zDown = false;
 
-#define KEY(k, f) if(key == (k)) { (f); }
 
 void ofApp::createObject() {
     
@@ -112,6 +112,8 @@ void ofApp::createObject() {
 //    creatingObject = !creatingObject;
 }
 
+#define KEY(k, f) if(key == (k)) { (f); }
+
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     
@@ -130,15 +132,17 @@ void ofApp::keyPressed(int key){
     KEY('d', universe->debug = !universe->debug);
     
     KEY(OF_KEY_COMMAND, control.useSecondary=true);
-    cout << "current pos = " << universe->pos << endl;
-    cout << "there are " << universe->objects.size() << " objects" << endl;
+    KEY(OF_KEY_ALT, control.useTertiary=true);
+    //cout << "current pos = " << universe->pos << endl;
+    //cout << "there are " << universe->objects.size() << " objects" << endl;
 
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-    zDown = false;
-    control.useSecondary=false;
+    KEY('z', zDown = false);
+    KEY(OF_KEY_COMMAND, control.useSecondary=false);
+    KEY(OF_KEY_ALT, control.useTertiary=false);
 }
 
 //--------------------------------------------------------------
@@ -183,20 +187,19 @@ void ofApp::mousePressed(int x, int y, int button){
    // cout << "cam pos = " << downPosition << endl;
     downOrientation = universe->cam.getOrientationQuat(); // ofCamera::getGlobalOrientation();
     
-    control.mousePressed(x, y, button);
-    
-    if(currentEditingObj == NULL) {
-        currentEditingObj = universe->findEditObject(x, y);
-        
-        if (currentEditingObj != NULL) {
-            control.setActive(1);
-            //if we found an object, set the of the control to the object so there is no jump
-            for (int i = 0; i < control.amnt; i++) {
-                control.fadersPos[i] = currentEditingObj->getParam(i);
-//                cout<<"fadersPOS " <<control.fadersPos[i]<<endl;
-//                cout<<"editObj " <<currentEditingObj->getParam(i)<<endl;
-//                cout<<"fadersPOS " <<control.fadersPos[i]<<endl;
-
+    if(currentEditingObj != NULL && control.deleteObject(x, y, button)) {
+        universe->deleteObject(currentEditingObj);
+        currentEditingObj == NULL;
+    } else {
+        control.mousePressed(x, y, button);
+        if(currentEditingObj == NULL) {
+            currentEditingObj = universe->findEditObject(x, y);
+            if (currentEditingObj != NULL) {
+                control.setActive(1);
+                //if we found an object, set the of the control to the object so there is no jump
+                for (int i = 0; i < control.amnt; i++) {
+                    control.fadersPos[i] = currentEditingObj->getParam(i);
+                }
             }
         }
     }

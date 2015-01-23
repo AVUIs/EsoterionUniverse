@@ -30,7 +30,7 @@ void ecuaObject::setup(ofVec3f _p, int _id) {
 
     objWarmth = ofRandom(255.0);
     objColor.setHsb(objWarmth, 255, 255);
-    objSize = ofRandom(10.0, 300.0);
+    objSize = ofRandom(100.0, 300.0);
     objSharpness = ofRandom(128.0, 255.0);
     objOscillation = ofRandom(1.0);
     objAmplitude = ofRandom(1.0);
@@ -54,6 +54,8 @@ void ecuaObject::update() {
         m.addFloatArg(getParam(2));
         m.addFloatArg(distToCenter);
         m.addFloatArg(distToCam);
+        m.addFloatArg(objAmplitude);
+        m.addFloatArg(objOscillation);
         sender->sendMessage(m);
         
     }
@@ -71,7 +73,7 @@ void ecuaObject::draw() {
     ofFill();
     ofSetColor(objColor);
     ball->setRadius(objSize);
-    ball->setResolution(objSize/50);
+    ball->setResolution(objSize/30);
     ball->setPosition(pos);
     
     //modify mesh with some noise
