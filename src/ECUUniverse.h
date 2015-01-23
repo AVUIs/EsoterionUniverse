@@ -33,7 +33,7 @@ public:
     ofCamera cam;
 //    map<int, ECUBaseObject*> objects;
     vector<ECUBaseObject*> objects;
-    ofVec3f pos;
+    ofVec3f pos, la;
 
     ofxXmlSettings xml;
     bool saved;

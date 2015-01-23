@@ -45,7 +45,7 @@ void ECUUniverse::draw() {
     
 
     cam.setPosition(pos);
-
+    cam.lookAt(la);
     
     ofSetColor(255);
     cam.begin();
@@ -58,15 +58,15 @@ void ECUUniverse::draw() {
 
     cam.end();
 
-    ofSetHexColor(0xffffff);
-    for (vector<ECUBaseObject*>::iterator it = objects.begin(); it != objects.end(); ++it) {
-        
-        ofVec3f screenPos = cam.worldToScreen((*it)->pos);
-        ofDrawBitmapString("dtc = " + ofToString(((*it)->distToCam)) + ", " + ofToString((*it)->distToCenter),  screenPos.x, screenPos.y);
-        
-//        ofDrawCircle(a.x, a.y, 20);
-        
-    }
+//    ofSetHexColor(0xffffff);
+//    for (vector<ECUBaseObject*>::iterator it = objects.begin(); it != objects.end(); ++it) {
+//        
+//        ofVec3f screenPos = cam.worldToScreen((*it)->pos);
+//        ofDrawBitmapString("dtc = " + ofToString(((*it)->distToCam)) + ", " + ofToString((*it)->distToCenter),  screenPos.x, screenPos.y);
+//        
+////        ofDrawCircle(a.x, a.y, 20);
+//        
+//    }
 }
 
 void ECUUniverse::save() {

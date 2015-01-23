@@ -102,6 +102,8 @@
 		E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = /System/Library/Frameworks/CoreVideo.framework; sourceTree = "<absolute>"; };
 		E7E077E715D3B6510020DFD4 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
 		E7F985F515E0DE99003869B5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = /System/Library/Frameworks/Accelerate.framework; sourceTree = "<absolute>"; };
+		EE0999211A6DD0E700A4C11C /* main.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = main.frag; path = bin/data/main.frag; sourceTree = "<group>"; };
+		EE0999221A6DD0E700A4C11C /* main.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = main.vert; path = bin/data/main.vert; sourceTree = "<group>"; };
 		EE264D031A348DBC00ADE8AC /* ecuaObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ecuaObject.cpp; sourceTree = "<group>"; };
 		EE264D041A348DBC00ADE8AC /* ecuaObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ecuaObject.h; sourceTree = "<group>"; };
 		EE264D071A34A31E00ADE8AC /* addon_config.mk */ = {isa = PBXFileReference; lastKnownFileType = text; path = addon_config.mk; sourceTree = "<group>"; };
@@ -241,6 +243,8 @@
 			children = (
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
+				EE0999211A6DD0E700A4C11C /* main.frag */,
+				EE0999221A6DD0E700A4C11C /* main.vert */,
 				E4B69E1C0A3A1BDC003C02F2 /* src */,
 				E4EEC9E9138DF44700A80321 /* openFrameworks */,
 				BB4B014C10F69532006C3DED /* addons */,
