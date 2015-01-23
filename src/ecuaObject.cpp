@@ -50,14 +50,14 @@ void ecuaObject::update() {
         m.setAddress("ecu");
         m.addIntArg(id);
         m.addFloatArg(getParam(0));
-        m.addFloatArg(ofMap((objSize+curSize), 10, 300, 0.0, 1.0, true));
+        m.addFloatArg(ofMap((objSize), 10, 300, 0.0, 1.0, true));
         m.addFloatArg(getParam(2));
         m.addFloatArg(distToCenter);
         m.addFloatArg(distToCam);
         m.addFloatArg(objAmplitude);
         m.addFloatArg(objOscillation);
-        sender->sendMessage(m);
-        
+        m.addFloatArg(ofMap((curSize), 10, 300, 0.0, 1.0, true));
+        sender->sendMessage(m);        
     }
 }
 
@@ -76,7 +76,7 @@ void ecuaObject::draw() {
     ball->setResolution(objSize/30);
     ball->setPosition(pos);
     
-    //modify mesh with some noise
+    //modify mesh with some noise - could do this only once..
     float liquidness = 5;
     float amplitude = 50 * objAmplitude * cos(ofGetElapsedTimef()*objOscillation);
     float speedDampen = 5;
