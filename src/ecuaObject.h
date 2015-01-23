@@ -52,6 +52,8 @@ public:
     float   objAmplitude;   //combined and mapped to oscillate spikiness
     float   curSize;
     
+    float lastSumNoise;
+    
 };
 
 

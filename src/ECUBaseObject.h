@@ -32,6 +32,7 @@ public:
     
     float distToCam;
     float distToCenter;
+    ofVec2f screenCoords;
     
     ECUUniverse *universeRef;
     

@@ -37,7 +37,8 @@ void ECUUniverse::update() {
             (*it)->distToCam = (*it)->pos.distance(this->pos);
             ofVec2f screenCenter(ofGetWidth()>>1, ofGetHeight()>>1);
             (*it)->distToCenter = screenCenter.distance(screenPos2);
-            
+            (*it)->screenCoords.x = (screenPos.x / screenCenter.x) - 1;
+            (*it)->screenCoords.y = (screenPos.y / screenCenter.y) - 1;
         }
     }
 

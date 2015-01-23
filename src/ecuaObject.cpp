@@ -54,6 +54,9 @@ void ecuaObject::update() {
         m.addFloatArg(getParam(2));
         m.addFloatArg(distToCenter);
         m.addFloatArg(distToCam);
+        m.addFloatArg(screenCoords.x);
+        m.addFloatArg(screenCoords.y);
+        m.addFloatArg(distToCam);
         m.addFloatArg(objAmplitude);
         m.addFloatArg(objOscillation);
         m.addFloatArg(ofMap((curSize), 10, 300, 0.0, 1.0, true));
@@ -78,21 +81,33 @@ void ecuaObject::draw() {
     
     //modify mesh with some noise - could do this only once..
     float liquidness = 5;
-    float amplitude = 50 * objAmplitude * cos(ofGetElapsedTimef()*objOscillation);
+    float amplitude = 50 * objAmplitude * cos(ofGetElapsedTimef()*objOscillation*10);
     float speedDampen = 5;
     vector<ofVec3f>& verts = ball->getMesh().getVertices();
-    for(unsigned int i = 0; i < verts.size(); i+=2){
-        verts[i].x += ofSignedNoise(verts[i].x/liquidness, verts[i].y/liquidness,verts[i].z/liquidness, ofGetElapsedTimef()/speedDampen)*amplitude;
-        verts[i].y += ofSignedNoise(verts[i].z/liquidness, verts[i].x/liquidness,verts[i].y/liquidness, ofGetElapsedTimef()/speedDampen)*amplitude;
-        verts[i].z += ofSignedNoise(verts[i].y/liquidness, verts[i].z/liquidness,verts[i].x/liquidness, ofGetElapsedTimef()/speedDampen)*amplitude;
+    float sumnoise = 0;
+    for(unsigned int i = 0; i < verts.size(); i+=1){
+        float n = ofSignedNoise(verts[i].x/liquidness, verts[i].y/liquidness,verts[i].z/liquidness, ofGetElapsedTimef()/speedDampen) * amplitude;
+//        float n = amplitude = 50 * objAmplitude * cos(ofGetElapsedTimef()*objOscillation*10 + i*0.1);
+//        verts[i].x+= n;
+//        verts[i].y+= n;
+//        verts[i].z+= n;
+        float nx = ofSignedNoise(verts[i].x/liquidness, verts[i].y/liquidness,verts[i].z/liquidness, ofGetElapsedTimef()/speedDampen)*amplitude;
+        verts[i].x += nx;
+        float ny = ofSignedNoise(verts[i].z/liquidness, verts[i].x/liquidness,verts[i].y/liquidness, ofGetElapsedTimef()/speedDampen)*amplitude;
+        verts[i].y += ny;
+        float nz = ofSignedNoise(verts[i].y/liquidness, verts[i].z/liquidness,verts[i].x/liquidness, ofGetElapsedTimef()/speedDampen)*amplitude;
+        verts[i].z += nz;
+        sumnoise+= nx+ny+nz;
     }
+//    cout << abs(lastSumNoise-sumnoise) << endl;
+    lastSumNoise = sumnoise;
     ball->rotate(0.1, 0.0, 1.0, 0.0);
-    ofEnableLighting();
+//    ofEnableLighting();
 //    light.enable();
     material.begin();
     ball->draw();
     material.end();
-    ofDisableLighting();
+//    ofDisableLighting();
 }
 
 void ecuaObject::setWarmth(float _warmth) {
