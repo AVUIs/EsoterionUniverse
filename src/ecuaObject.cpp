@@ -48,19 +48,24 @@ void ecuaObject::update() {
         ofxOscMessage m;
         
         m.setAddress("ecu");
+        
         m.addIntArg(id);
+        
         m.addFloatArg(getParam(0));
         m.addFloatArg(ofMap((objSize), 10, 300, 0.0, 1.0, true));
         m.addFloatArg(getParam(2));
+        
         m.addFloatArg(distToCenter);
         m.addFloatArg(distToCam);
+        
         m.addFloatArg(screenCoords.x);
         m.addFloatArg(screenCoords.y);
-        m.addFloatArg(distToCam);
+        
         m.addFloatArg(objAmplitude);
         m.addFloatArg(objOscillation);
         m.addFloatArg(ofMap((curSize), 10, 300, -1.0, 1.0, true));
-        sender->sendMessage(m);        
+        
+        sender->sendMessage(m);
     }
 }
 
