@@ -59,7 +59,7 @@ void ecuaObject::update() {
         m.addFloatArg(distToCam);
         m.addFloatArg(objAmplitude);
         m.addFloatArg(objOscillation);
-        m.addFloatArg(ofMap((curSize), 10, 300, 0.0, 1.0, true));
+        m.addFloatArg(ofMap((curSize), 10, 300, -1.0, 1.0, true));
         sender->sendMessage(m);        
     }
 }
