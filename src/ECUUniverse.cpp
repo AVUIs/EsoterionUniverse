@@ -24,14 +24,14 @@ ECUUniverse::~ECUUniverse() {
 }
 
 void ECUUniverse::update() {
-    for (vector<ECUBaseObject*>::iterator it = objects.begin(); it != objects.end(); ++it) {
-        (*it)->update();
-    }
+//    for (vector<ECUBaseObject*>::iterator it = objects.begin(); it != objects.end(); ++it) {
+//        (*it)->update();
+//    }
     for (vector<ECUBaseObject*>::iterator it = objects.begin(); it != objects.end(); ++it) {
         
         ofVec3f screenPos = cam.worldToScreen((*it)->pos);
         ofPoint screenPos2 = ofPoint(screenPos.x, screenPos.y); //in 2D
-        ofRectangle screenRect = ofRectangle(0, 0, ofGetWidth(), ofGetHeight());
+        ofRectangle screenRect = ofRectangle(-100, -100, ofGetWidth()+200, ofGetHeight()+200); //KX safety margin
         
         if (screenRect.inside(screenPos.x, screenPos.y)) {
             (*it)->distToCam = (*it)->pos.distance(this->pos);
@@ -39,6 +39,7 @@ void ECUUniverse::update() {
             (*it)->distToCenter = screenCenter.distance(screenPos2);
             (*it)->screenCoords.x = (screenPos.x / screenCenter.x) - 1;
             (*it)->screenCoords.y = (screenPos.y / screenCenter.y) - 1;
+            (*it)->update();    //KX update only visible objects
         }
     }
 
@@ -55,7 +56,13 @@ void ECUUniverse::draw() {
     
 
     for (vector<ECUBaseObject*>::iterator it = objects.begin(); it != objects.end(); ++it) {
-        (*it)->draw();
+        ofVec3f screenPos = cam.worldToScreen((*it)->pos);
+        ofPoint screenPos2 = ofPoint(screenPos.x, screenPos.y); //in 2D
+        ofRectangle screenRect = ofRectangle(-100, -100, ofGetWidth()+200, ofGetHeight()+200); //KX safety margin
+        
+        if (screenRect.inside(screenPos.x, screenPos.y)) {
+            (*it)->draw();    //KX draw only visible objects
+        }
     }
     
 
@@ -140,7 +147,6 @@ ECUBaseObject* ECUUniverse::findEditObject(float x, float y) {
         ofVec3f screenPos = cam.worldToScreen((*it)->pos);
         ofPoint screenPos2 = ofPoint(screenPos.x, screenPos.y); //in 2D
         float d = screenPos.distance(ofVec2f(x, y));
-        cout << d << endl;
         if (d  < DIST_TO_SELECT) {
             return *it;
         }

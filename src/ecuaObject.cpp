@@ -42,8 +42,8 @@ void ecuaObject::setup(ofVec3f _p, int _id) {
 }
 
 void ecuaObject::update() {
-    curSize = objSize * objAmplitude * cos(ofGetElapsedTimef()*objOscillation);
-    
+//    curSize = objSize * objAmplitude * cos(ofGetElapsedTimef()*objOscillation);
+    curSize = cos(ofGetElapsedTimef()*objOscillation);
     if (sender!=NULL) {
         ofxOscMessage m;
         

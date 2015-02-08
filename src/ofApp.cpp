@@ -10,6 +10,7 @@ ofVec3f p;
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofSetVerticalSync(true);
+    ofSetFrameRate(30);
 //    ofSetEscapeQuitsApp(false);
 //    mesh.load("lofi-bunny.ply");
     
