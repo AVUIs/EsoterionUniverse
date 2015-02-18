@@ -1,24 +1,46 @@
-Presenting the one and only:
-Esoterion Carrot Universe  `alpha`
+Esoterion Universe
 ==================
 
-A great AV project by:
+A deep and colourful generative 3D AV project.
 
-Borut, Matt, Coralie and Will
+Main features:
+- Infinite 3D space
+- Infinite number of planet-like dynamic objects
+- Single screen for interface and output
 
 What you need
 -------------
 
-- The most recent version of openFrameworks, you can download that here: https://github.com/openframeworks/openFrameworks/archive/master.zip
+- The most recent version of openFrameworks, download here: https://github.com/openframeworks/openFrameworks/archive/master.zip
+- Max 7, download trial here: https://cycling74.com/products/max/
+- FTM library for Max 7, download here: http://ftm.ircam.fr/index.php/Download
 
-- Probably some patience
-- A coolness factor over 0.12
-
-Instructions
+Installation
 ------------
 
-Navigate the world using scrolling, left and right is the way you would imagine, zooming is scrolling up and down while holding the `z` key.
+- Unzip openFrameworks to a convenient place in your system
+- Clone this repository to 'apps/myApps/EsoterionUniverse/' inside openFrameworks folder
+- Download sound source from 'http://wirelesscowboy.org/esoterionuniverse/balayage444.wav' and place in 'EsoterionUniverse/bin/max/' folder
+- Install Max 7
+- Install FTM library
 
-Create an object using the `a` key.
+Running
+-------
 
-Edit an object's parameters by clicking on it. Save the settings by pressing `a`.
+- Open 'max/MainPatch.maxpat' in Max 7, when loaded click Audio On/Off (beware of a glitch first time)
+- Open and run XCode project 'esoterionUniverse.xcodeproj'
+- Add an object with 'a' key and try changing the parameters
+- If there's no sound, first turn volume up, then click Audio On/Off twice in Max patch
+- Show instructions with 'h' key
+- Play around and have fun
+
+Known issue
+-----------
+
+Due to either a compabitility issue between poly~ and gbr.ola objects, or cpu consumption issues between video/osc/synthesis on the same computer, the granular synthesis is affected by glitches. A new version should see these problems solved hopefully.
+
+A great AV project by
+---------------------
+
+Borut, Matt, Coralie and Will
+
