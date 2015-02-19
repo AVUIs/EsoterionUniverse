@@ -20,9 +20,9 @@ Installation
 
 - Unzip openFrameworks to a convenient place in your system
 - Clone this repository to `apps/myApps/EsoterionUniverse/` inside openFrameworks folder
-- Download sound source from `http://wirelesscowboy.org/esoterionuniverse/balayage444.wav` and place in `EsoterionUniverse/bin/max/` folder
+- Download sound source from http://wirelesscowboy.org/esoterionuniverse/balayage444.wav and place in `EsoterionUniverse/bin/max/` folder
 - Install Max 7
-- Install FTM library
+- Install FTM library: if needed add it manually to `Max 7/Packages` folder inside your user's `Documents` folder
 
 Running
 -------
