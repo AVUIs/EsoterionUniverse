@@ -39,6 +39,11 @@ Known issue
 
 Due to either a compabitility issue between poly~ and gbr.ola objects, or cpu consumption issues between video/osc/synthesis on the same computer, the granular synthesis is affected by glitches. A new version should see these problems solved hopefully.
 
+Disclaimer
+----------
+
+This software is provided here on an “as is” basis, without warranty of any kind, either expressed, implied, or statutory, including, without limitation, warranties that it is free of defects, merchantable, fit for a particular purpose or non-infringing. The entire risk as to the quality and performance of the software is with you.
+
 Credits
 ---------------------
 
